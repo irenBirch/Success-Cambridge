@@ -1,0 +1,1060 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Goals and Achievements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky section bar on top; each section = exercise index (left rail) + stacked exercise cards. Gold stars = goals reached. */
+:root{
+  /* beige paper single theme */
+  color-scheme:light;
+  --bg:#f2eadb; --surface:#fbf6ec; --surface2:#efe5d3; --ink:#2b2520; --muted:#6d6151; --line:#ddcfb8;
+  --accent:#1d6b66; --accent-ink:#ffffff; --accent-soft:#dbe8df;
+  --gold:#c4860f; --gold-soft:#f5e1b3;
+  --ok:#2e7a3c; --ok-soft:#dcefd9; --bad:#b03a2c; --bad-soft:#f6dcd3;
+  --cb:#1d6b66; --wb:#4b4f96; --x:#a35a16;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;margin:0}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;flex-wrap:wrap;align-items:center;gap:0 16px}
+.bar-in .brand{flex:1}
+.bar-in nav.tabs{order:3;flex:0 0 calc(100% + 24px);margin:0 -12px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:18px;white-space:nowrap;padding-block:12px;display:flex;align-items:center;gap:8px}
+.brand small{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--muted);font-weight:500}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{border:0;background:none;padding:10px 9px 11px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-weight:700;color:var(--muted);font-size:15px}
+nav.tabs button .l{font-family:var(--f-mono);font-size:12px;margin-right:6px;color:var(--accent)}
+nav.tabs button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button:hover{color:var(--ink)}
+.stars{font-family:var(--f-mono);font-size:13px;background:var(--gold-soft);color:var(--ink);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.stars b{color:var(--gold)}
+
+main{max-width:1200px;margin:0 auto;padding:24px 16px 80px}
+.sec-head{display:grid;gap:8px;margin-bottom:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.sec-head h1{font-size:clamp(30px,5vw,48px);font-weight:800}
+.sec-head p{margin:0;color:var(--muted);max-width:65ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);margin-top:4px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:start}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 112px);max-height:calc(100vh - 100px);overflow:auto;display:grid;gap:2px;padding-right:4px}
+.rail a{display:flex;gap:8px;align-items:baseline;padding:6px 8px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.3}
+.rail a img.emo{flex:0 0 18px;margin-top:-1px}
+.rail a:hover{background:var(--surface)}
+.rail a .n{font-family:var(--f-mono);font-size:11px;flex:0 0 58px;color:var(--muted)}
+.rail a.done .n{color:var(--gold)}
+.rail .grp{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 8px 4px}
+.cards{display:grid;gap:20px;min-width:0}
+@media (max-width:860px){.layout{grid-template-columns:1fr}.rail{display:none}}
+
+/* exercise card */
+.ex{display:flow-root;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px clamp(16px,3vw,28px) 22px;min-width:0;scroll-margin-top:120px}
+.ex-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:6px}
+.code{font-family:var(--f-mono);font-size:12px;padding:3px 7px;border-radius:4px;border:1px solid currentColor}
+.src-cb{color:var(--cb)} .src-wb{color:var(--wb)} .src-x{color:var(--x)}
+.ex h2{font-size:22px;font-weight:700}
+.ex .star{margin-left:auto;font-size:20px;color:var(--line)}
+.ex .star.on{color:var(--gold)}
+.instr{color:var(--muted);margin:6px 0 14px;max-width:70ch}
+.tip{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:0 0 14px;font-size:15px}
+.tip b{font-family:var(--f-display)}
+.ua{display:block;margin-top:4px;font-size:14px;color:var(--muted)}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:10px;border:1px dashed var(--line);border-radius:8px}
+.bank span{font-size:15px;padding:2px 9px;background:var(--surface2);border-radius:4px}
+.bank span.used{opacity:.4;text-decoration:line-through}
+
+ol.items{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:it}
+ol.items>li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 8px;align-items:baseline}
+ol.items>li::before{counter-increment:it;content:counter(it, lower-alpha);font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+ol.items.num>li::before{content:counter(it)}
+.q{min-width:0}
+
+input.g,select.g{font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:0;border-bottom:2px solid var(--muted);padding:1px 6px;min-width:6ch;border-radius:3px 3px 0 0}
+select.g{padding-right:2px;max-width:100%}
+input.g:focus,select.g:focus{outline:none;border-bottom-color:var(--accent);background:var(--accent-soft)}
+input.wide{width:100%}
+.ok{background:var(--ok-soft)!important;border-bottom-color:var(--ok)!important}
+.no{background:var(--bad-soft)!important;border-bottom-color:var(--bad)!important}
+.fix{font-family:var(--f-mono);font-size:13px;color:var(--ok);margin-left:4px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;vertical-align:baseline}
+.seg button{border:1px solid var(--line);background:var(--surface2);padding:1px 10px;border-radius:999px;cursor:pointer;font-size:15px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.seg button.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ink)}
+.seg button.no{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
+.opts{display:grid;gap:6px;margin-top:6px}
+.opts button{text-align:left;border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:8px 12px;cursor:pointer;display:flex;gap:10px}
+.opts button .k{font-family:var(--f-mono);font-size:13px;color:var(--muted);padding-top:2px}
+.opts button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opts button.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.no{border-color:var(--bad);background:var(--bad-soft)}
+.opts.row{display:flex;flex-wrap:wrap}
+.exp{font-size:14px;color:var(--muted);margin-top:4px}
+.tok{cursor:pointer;border-radius:3px;padding:0 1px}
+.tok:hover{background:var(--accent-soft)}
+.tok.sel{background:var(--gold-soft);text-decoration:line-through;text-decoration-thickness:2px}
+.tok.ok{background:var(--ok-soft)} .tok.no{background:var(--bad-soft)}
+
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px}
+.btn{border:1px solid var(--line);background:var(--surface2);padding:7px 14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{filter:brightness(.97)}
+.result{font-family:var(--f-mono);font-size:14px;margin-left:4px}
+.result.full{color:var(--ok)}
+
+textarea{width:100%;min-height:140px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;resize:vertical}
+.wc{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-top:4px}
+.wc.good{color:var(--ok)}
+.model{margin-top:12px;background:var(--surface2);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0}
+.model p{margin:.4em 0}
+.check{display:grid;gap:4px;margin:12px 0 0;padding:0;list-style:none}
+.check label{display:flex;gap:8px;align-items:baseline;cursor:pointer}
+ul.plain{margin:6px 0 12px;padding-left:20px}
+
+.passage{background:var(--surface2);border-radius:8px;padding:18px 20px;margin:0 0 16px;max-width:75ch}
+.passage h3{font-size:20px;margin-bottom:6px}
+.passage p{margin:.6em 0}
+.passage .pn{font-family:var(--f-mono);font-size:12px;color:var(--accent);margin-right:6px}
+.passage .meta{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.bubble{border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:10px 14px;background:var(--surface2);margin:8px 0;max-width:60ch}
+
+.audio{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--gold-soft);border-radius:8px;padding:10px 12px;margin:0 0 14px}
+.player .note{font-size:13px;color:var(--muted)}
+.player{display:grid;gap:10px;background:var(--gold-soft);border-radius:10px;padding:12px 14px;margin:0 0 14px}
+.prow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.prow .grow{flex:1}
+.pp{min-width:112px}
+.time{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums}
+select.speed{min-width:0;font-size:14px}
+input.seek{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;background:linear-gradient(to right,var(--accent) var(--p,0%),var(--line) var(--p,0%));cursor:pointer;margin:4px 0}
+input.seek::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--surface)}
+input.seek::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--surface)}
+.script .sent{cursor:pointer;border-radius:3px}
+.script .sent:hover{background:var(--accent-soft)}
+.script .sent.cur{background:var(--gold-soft);box-shadow:0 0 0 2px var(--gold-soft)}
+.script{margin:0 0 14px;font-size:15px;background:var(--surface2);padding:12px 16px;border-radius:8px}
+.script p{margin:.4em 0}
+
+.spellrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.spellword{font-family:var(--f-display);font-size:22px;min-width:9ch;transition:filter .2s}
+.spellword.hid{filter:blur(8px);user-select:none}
+
+.chart{display:grid;gap:6px;margin:6px 0 16px;max-width:520px}
+.chart .r{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;font-size:14px}
+.chart .b{height:20px;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-family:var(--f-mono);font-size:12px}
+.chart .m{background:var(--accent-soft);border:1px solid var(--accent)}
+.chart .w{background:var(--gold-soft);border:1px solid var(--gold)}
+
+.grid-home{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;text-align:left;display:grid;gap:6px}
+.tile:hover{border-color:var(--accent)}
+.tile .l{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+.tile h3{font-size:20px}
+.tile p{margin:0;font-size:14px;color:var(--muted)}
+.meter{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--gold)}
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:end;margin-bottom:28px}
+.hero h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.goalpost{font-family:var(--f-mono);font-size:13px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px;display:grid;gap:4px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+@media (max-width:900px){.grid-home{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid-home{grid-template-columns:1fr}}
+.timer{font-family:var(--f-mono);font-size:22px;min-width:5ch}
+.fig{margin:0 0 16px}
+.fig img{display:block;border-radius:8px;border:1px solid var(--line)}
+.fig.wide img{width:100%;max-height:380px;object-fit:cover}
+.fig.side{float:right;width:min(36%,270px);margin:0 0 14px 20px}
+.fig.side img{width:100%;height:auto}
+.fig figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+@media (max-width:640px){.fig.side{float:none;width:100%;margin:0 0 14px}}
+.track{font-family:var(--f-mono);font-size:12px;background:var(--surface);padding:3px 8px;border-radius:4px}
+
+/* ---- emoji & illustrations (Fluent Emoji 3D, MIT) ---- */
+img.emo{display:inline-block;vertical-align:middle;user-select:none;pointer-events:none}
+nav.tabs button img.emo{width:22px;height:22px;margin-right:6px;margin-top:-3px}
+.ex h2{display:flex;align-items:center;gap:10px}
+.ex h2 img.emo{width:34px;height:34px;flex:0 0 34px}
+.sec-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:center;margin-bottom:22px}
+.sec-grid .sec-head{margin:0}
+.scene{position:relative;height:210px;border-radius:22px;background:radial-gradient(circle at 30% 35%,var(--gold-soft),transparent 60%),radial-gradient(circle at 75% 70%,var(--accent-soft),transparent 60%),var(--surface2);overflow:hidden}
+.scene img.emo{position:absolute;filter:drop-shadow(0 8px 10px rgba(80,55,20,.22));animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(calc(var(--r,0deg) + 4deg))}}
+.hero .scene{height:230px;margin-bottom:16px}
+@media (max-width:860px){.sec-grid{grid-template-columns:1fr}.sec-grid .scene{height:150px}}
+.strip{position:relative;height:118px;border-radius:14px;margin:0 0 16px;background:linear-gradient(100deg,var(--gold-soft),var(--accent-soft));overflow:hidden;display:flex;align-items:center;justify-content:space-evenly;padding:0 10px}
+.strip img.emo{width:78px;height:78px;filter:drop-shadow(0 6px 8px rgba(80,55,20,.2));animation:bob 6s ease-in-out infinite}
+.strip img.emo:nth-child(odd){--r:-8deg;animation-delay:-2s}
+.strip img.emo:nth-child(even){--r:7deg;width:64px;height:64px}
+@media (max-width:560px){.strip{height:90px}.strip img.emo{width:54px;height:54px}.strip img.emo:nth-child(even){width:46px;height:46px}}
+.tile{position:relative}
+.tile img.emo{position:absolute;top:12px;right:12px;width:52px;height:52px;filter:drop-shadow(0 5px 6px rgba(80,55,20,.2))}
+.tile h3{padding-right:56px}
+.result img.emo{width:24px;height:24px;margin-right:4px}
+.actions{position:relative}
+.burst{position:absolute;width:34px;height:34px;left:40px;top:0;pointer-events:none;animation:burst 1.1s ease-out forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(.4);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--rot));opacity:0}}
+@media (prefers-reduced-motion:reduce){.scene img.emo,.strip img.emo{animation:none}.burst{display:none}}
+.footnote{font-size:13px;color:var(--muted);margin-top:40px;max-width:70ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand">Unit 1 <small>GOALS &amp; ACHIEVEMENTS</small></div>
+    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+    <div class="stars" id="stars" title="Exercises completed with 100%">★ <b id="starN">0</b>/<span id="starT">0</span></div>
+  </div>
+</header>
+<main id="main"></main>
+
+<script>
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const el=(tag,attrs={},...kids)=>{const e=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v)}for(const k of kids.flat()){if(k==null)continue;e.append(k.nodeType?k:document.createTextNode(k))}return e};
+const norm=s=>(s||'').toLowerCase().replace(/[’‘`´]/g,"'").replace(/[–—]/g,'-').replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').trim().replace(/[.!?;:,]+$/,'').trim();
+const normS=s=>norm(s).replace(/[“”"]/g,'').replace(/\s*,\s*/g,', ');
+const shuffle=(a,seed=7)=>{a=a.slice();let s=seed;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const store={get(k,d){try{const v=localStorage.getItem('u1:'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('u1:'+k,JSON.stringify(v))}catch(e){}}};
+let scores=store.get('scores',{});
+
+/* ---------- speech ---------- */
+let voices=[];
+function loadVoices(){try{voices=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang))}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function speak(lines,onend){
+  try{speechSynthesis.cancel()}catch(e){if(onend)onend();return false}
+  const gb=voices.filter(v=>/GB|UK/i.test(v.lang+v.name));const pool=(gb.length>1?gb:voices);
+  lines.forEach((ln,i)=>{const u=new SpeechSynthesisUtterance(ln.t);u.lang='en-GB';u.rate=ln.rate||0.92;
+    const vi=ln.v||0; if(pool.length) u.voice=pool[vi%pool.length]; u.pitch=vi%2?1.15:0.95;
+    if(i===lines.length-1&&onend)u.onend=onend; speechSynthesis.speak(u)});
+  return true;
+}
+let activePlayer=null;
+function stopSpeak(){if(activePlayer)activePlayer.pause();try{speechSynthesis.cancel()}catch(e){}}
+const fmt=s=>{s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function makePlayer(ex){
+  const segs=[];
+  ex.audio.forEach((l,li)=>{(l.t.match(/[^.!?…]+(?:[.!?…]+["'’”)]*|$)\s*/g)||[l.t]).forEach(t=>{t=t.trim();if(t)segs.push({t,v:l.v||0,li})})});
+  let acc=0;segs.forEach(sg=>{sg.start=acc;acc+=sg.t.length+8});const total=acc;
+  const CPS=14;let idx=0,pos=0,playing=false,token=0,rate=0.95,t0=0;
+  const secs=c=>c/(CPS*rate);
+  const bPlay=el('button',{class:'btn primary pp',type:'button'},'▶ Play');
+  const bBack=el('button',{class:'btn',type:'button',title:'Back one sentence','aria-label':'Back one sentence'},'◂◂');
+  const bFwd=el('button',{class:'btn',type:'button',title:'Forward one sentence','aria-label':'Forward one sentence'},'▸▸');
+  const range=el('input',{type:'range',class:'seek',min:'0',max:String(total),step:'1',value:'0','aria-label':'Position in recording'});
+  const time=el('span',{class:'time'},'0:00');
+  const speed=el('select',{class:'g speed','aria-label':'Speed'},...[['0.75','0.75×'],['0.95','1×'],['1.15','1.25×']].map(([v,l])=>{const o=el('option',{value:v},l);if(v==='0.95')o.selected=true;return o}));
+  const spans=[];
+  const scr=el('div',{class:'script',hidden:''});
+  ex.audio.forEach((l,li)=>{const p=el('p',{},l.who?el('b',{},l.who+': '):null);segs.forEach((sg,i)=>{if(sg.li!==li)return;const sp=el('span',{class:'sent',onclick:()=>seek(i,true)},sg.t+' ');spans[i]=sp;p.append(sp)});scr.append(p)});
+  const bScr=el('button',{class:'btn',type:'button',onclick:()=>{scr.hidden=!scr.hidden;bScr.textContent=scr.hidden?'Show transcript':'Hide transcript'}},'Show transcript');
+  function render(){range.value=pos;range.style.setProperty('--p',(pos/total*100)+'%');time.textContent=fmt(secs(pos))+' / '+fmt(secs(total));
+    spans.forEach((sp,i)=>sp.classList.toggle('cur',i===idx&&(playing||pos>0)));
+    bPlay.textContent=playing?'❚❚ Pause':(pos>0?'▶ Resume':'▶ Play')}
+  function speakSeg(){
+    if(idx>=segs.length){playing=false;idx=0;pos=0;render();return}
+    const my=++token;const sg=segs[idx];
+    const gb=voices.filter(v=>/GB|UK/i.test(v.lang+v.name));const pool=(gb.length>1?gb:voices);
+    const u=new SpeechSynthesisUtterance(sg.t);u.lang='en-GB';u.rate=rate;if(pool.length)u.voice=pool[sg.v%pool.length];u.pitch=sg.v%2?1.15:0.95;
+    u.onend=()=>{if(my!==token||!playing)return;idx++;pos=idx<segs.length?segs[idx].start:total;speakSeg()};
+    pos=sg.start;t0=performance.now();
+    try{speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){playing=false;scr.hidden=false}
+    render()}
+  setInterval(()=>{if(!playing)return;const sg=segs[idx];if(!sg)return;pos=Math.min(sg.start+(performance.now()-t0)/1000*CPS*rate,sg.start+sg.t.length+7);render()},200);
+  const api={
+    play(){if(activePlayer&&activePlayer!==api)activePlayer.pause();activePlayer=api;playing=true;speakSeg()},
+    pause(){if(!playing)return;playing=false;token++;try{speechSynthesis.cancel()}catch(e){}render()}};
+  function seek(i,start){idx=Math.max(0,Math.min(segs.length-1,i));pos=segs[idx].start;if(playing)speakSeg();else if(start)api.play();else render()}
+  const idxAt=v=>{let i=0;segs.forEach((sg,k)=>{if(sg.start<=v)i=k});return i};
+  bPlay.onclick=()=>playing?api.pause():api.play();
+  bBack.onclick=()=>seek(idx-1);bFwd.onclick=()=>seek(idx+1);
+  range.addEventListener('input',()=>{pos=+range.value;idx=idxAt(pos);time.textContent=fmt(secs(pos))+' / '+fmt(secs(total));range.style.setProperty('--p',(pos/total*100)+'%')});
+  range.addEventListener('change',()=>seek(idxAt(+range.value)));
+  speed.addEventListener('change',()=>{rate=+speed.value;if(playing)speakSeg();else render()});
+  render();
+  const wrap=el('div',{},
+    el('div',{class:'player'},
+      el('div',{class:'prow'},bBack,bPlay,bFwd,time,el('span',{class:'grow'}),ex.track?el('span',{class:'track'},ex.track):null,speed),
+      range,
+      el('div',{class:'prow'},bScr,el('span',{class:'note'},'Official audioscript read by your browser’s voice. Drag the bar or click any sentence in the transcript to jump there.'))),
+    scr);
+  return wrap;
+}
+
+/* ---------- inline parsing ---------- */
+// choice: [opt|*correct|opt]   gap: {ans|alt}   dropdown gap uses bank
+function parseInline(text,ctrls,opts={}){
+  const frag=document.createDocumentFragment();
+  const re=/\[([^\]]+)\]|\{([^}]+)\}/g;let last=0,m;
+  while((m=re.exec(text))){
+    frag.append(document.createTextNode(text.slice(last,m.index)));last=re.lastIndex;
+    if(m[1]){ // choice
+      const parts=m[1].split('|');const seg=el('span',{class:'seg',role:'group'});let pick=null;
+      const correct=parts.find(p=>p.startsWith('*')).slice(1);
+      const btns=parts.map(p=>{const t=p.replace(/^\*/,'');const b=el('button',{type:'button','aria-pressed':'false',onclick:()=>{btns.forEach(x=>{x.setAttribute('aria-pressed','false');x.classList.remove('ok','no')});b.setAttribute('aria-pressed','true');pick=t}},t);b.dataset.t=t;return b});
+      seg.append(...btns);frag.append(seg);
+      ctrls.push({check(){btns.forEach(x=>x.classList.remove('ok','no'));const b=btns.find(x=>x.dataset.t===pick);const r=pick===correct;if(b)b.classList.add(r?'ok':'no');return r},
+        reveal(){btns.forEach(x=>{x.classList.remove('no');x.setAttribute('aria-pressed',x.dataset.t===correct?'true':'false');if(x.dataset.t===correct)x.classList.add('ok')});pick=correct},
+        reset(){pick=null;btns.forEach(x=>{x.setAttribute('aria-pressed','false');x.classList.remove('ok','no')})}});
+    }else{ // gap
+      const ans=m[2].split('|');let inp;
+      if(opts.dropdown){inp=el('select',{class:'g'},el('option',{value:''},'…'),...opts.bank.map(b=>el('option',{value:b},b)))}
+      else{inp=el('input',{class:'g',type:'text',autocomplete:'off',spellcheck:'false',size:Math.max(6,Math.min(28,ans[0].length+2))})}
+      const fx=el('span',{class:'fix'});frag.append(inp,fx);
+      ctrls.push({check(){inp.classList.remove('ok','no');const v=norm(inp.value);const r=opts.loose?(v.length>2&&ans.some(a=>v.includes(norm(a)))):ans.some(a=>norm(a)===v);inp.classList.add(r?'ok':'no');return r},
+        reveal(){inp.value=ans[0];inp.classList.remove('no');inp.classList.add('ok');fx.textContent=ans.length>1?' ('+ans.slice(1).join(' / ')+')':''},
+        reset(){inp.value='';inp.classList.remove('ok','no');fx.textContent=''}});
+    }
+  }
+  frag.append(document.createTextNode(text.slice(last)));return frag;
+}
+
+/* ---------- renderers ---------- */
+const R={};
+R.choice=(ex,body,ctrls)=>{const ol=el('ol',{class:'items'+(ex.num?' num':'')});ex.items.forEach(t=>ol.append(el('li',{},el('div',{class:'q'},parseInline(t,ctrls)))));body.append(ol)};
+R.gap=(ex,body,ctrls)=>{
+  if(ex.bank)body.append(el('div',{class:'bank'},...ex.bank.map(b=>el('span',{},b))));
+  if(ex.para){const p=el('div',{class:'passage'});ex.items.forEach(t=>p.append(el('p',{},parseInline(t,ctrls,{dropdown:ex.dropdown,bank:ex.bank}))));body.append(p);return}
+  const ol=el('ol',{class:'items'+(ex.num?' num':'')});ex.items.forEach(t=>ol.append(el('li',{},el('div',{class:'q'},parseInline(t,ctrls,{dropdown:ex.dropdown,bank:ex.bank,loose:ex.loose})))));body.append(ol)};
+R.select=(ex,body,ctrls)=>{
+  const options=ex.options||[...new Set(ex.items.map(i=>i.a))].sort((a,b)=>a.localeCompare(b));
+  const ol=el('ol',{class:'items'+(ex.num?' num':'')});
+  ex.items.forEach(it=>{const s=el('select',{class:'g'},el('option',{value:''},'choose…'),...options.map(o=>el('option',{value:o},o)));
+    const accept=Array.isArray(it.a)?it.a:[it.a];
+    ol.append(el('li',{},el('div',{class:'q'},el('div',{html:it.q}),s)));
+    ctrls.push({check(){s.classList.remove('ok','no');const r=accept.includes(s.value);s.classList.add(r?'ok':'no');return r},reveal(){s.value=accept[0];s.classList.remove('no');s.classList.add('ok')},reset(){s.value='';s.classList.remove('ok','no')}})});
+  body.append(ol)};
+R.mcq=(ex,body,ctrls)=>{
+  const ol=el('ol',{class:'items'+(ex.letters?'':' num')});
+  ex.items.forEach(it=>{let pick=null;const row=ex.inline||it.o.every(o=>o.length<14);const box=el('div',{class:'opts'+(row?' row':'')});const exp=el('div',{class:'exp',hidden:''},it.e||'');
+    const btns=it.o.map((o,i)=>{const b=el('button',{type:'button','aria-pressed':'false',onclick:()=>{btns.forEach(x=>{x.setAttribute('aria-pressed','false');x.classList.remove('ok','no')});b.setAttribute('aria-pressed','true');pick=i}},row?'':el('span',{class:'k'},'ABCDEFG'[i]),el('span',{},o));return b});
+    box.append(...btns);ol.append(el('li',{},el('div',{class:'q'},el('div',{html:it.q}),box,exp)));
+    ctrls.push({check(){btns.forEach(x=>x.classList.remove('ok','no'));if(pick==null)return false;const r=pick===it.a;btns[pick].classList.add(r?'ok':'no');if(it.e)exp.hidden=false;return r},
+      reveal(){btns.forEach((x,i)=>{x.classList.remove('no');x.setAttribute('aria-pressed',i===it.a?'true':'false');if(i===it.a)x.classList.add('ok')});pick=it.a;if(it.e)exp.hidden=false},
+      reset(){pick=null;exp.hidden=true;btns.forEach(x=>{x.setAttribute('aria-pressed','false');x.classList.remove('ok','no')})}})});
+  body.append(ol)};
+R.rewrite=(ex,body,ctrls)=>{
+  const ol=el('ol',{class:'items'+(ex.num?' num':'')});
+  ex.items.forEach(it=>{const inp=el('input',{class:'g wide',type:'text',autocomplete:'off',spellcheck:'false'});const fx=el('div',{class:'fix'});
+    if(ex.prefill)inp.value=it.q;
+    ol.append(el('li',{},el('div',{class:'q'},ex.prefill?'':el('div',{},it.q),inp,fx)));
+    const acc=Array.isArray(it.a)?it.a:[it.a];
+    ctrls.push({check(){inp.classList.remove('ok','no');fx.textContent='';const r=acc.some(a=>normS(a)===normS(inp.value));inp.classList.add(r?'ok':'no');return r},
+      reveal(){inp.value=acc[0];inp.classList.remove('no');inp.classList.add('ok')},reset(){inp.value=ex.prefill?it.q:'';fx.textContent='';inp.classList.remove('ok','no')}})});
+  body.append(ol)};
+R.strike=(ex,body,ctrls)=>{
+  const ol=el('ol',{class:'items'+(ex.num?' num':'')});
+  ex.items.forEach(it=>{const words=it.s.split(' ');let ans=-1,sel=-1;const line=el('div',{class:'q'});
+    const toks=words.map((w,i)=>{if(w.startsWith('*')){ans=i;w=w.slice(1)}const t=el('span',{class:'tok',onclick:()=>{toks.forEach(x=>x.classList.remove('sel','ok','no'));sel=i;t.classList.add('sel')}},w);return t});
+    toks.forEach((t,i)=>{line.append(t);if(i<toks.length-1)line.append(' ')});
+    let fix=null;if(it.fix){fix=el('input',{class:'g',type:'text',placeholder:'correct word',autocomplete:'off',spellcheck:'false'});line.append(el('div',{},'→ ',fix))}
+    ol.append(el('li',{},line));
+    ctrls.push({check(){toks.forEach(x=>x.classList.remove('ok','no'));let r=sel===ans;if(sel>=0)toks[sel].classList.add(r?'ok':'no');if(fix){fix.classList.remove('ok','no');const f=it.fix.split('|').some(a=>norm(a)===norm(fix.value));fix.classList.add(f?'ok':'no');r=r&&f}return r},
+      reveal(){toks.forEach(x=>x.classList.remove('sel','no','ok'));toks[ans].classList.add('sel','ok');sel=ans;if(fix){fix.value=it.fix.split('|')[0];fix.classList.add('ok')}},
+      reset(){sel=-1;toks.forEach(x=>x.classList.remove('sel','ok','no'));if(fix){fix.value='';fix.classList.remove('ok','no')}}})});
+  body.append(ol)};
+R.spell=(ex,body,ctrls)=>{
+  const ol=el('ol',{class:'items num'});
+  ex.items.forEach(w=>{const word=el('span',{class:'spellword'+(ex.dictation?' hid':'')},w);const inp=el('input',{class:'g',type:'text',autocomplete:'off',spellcheck:'false',size:16});
+    const say=el('button',{class:'btn',type:'button',onclick:()=>speak([{t:w,rate:.8}])},'▶ Say');
+    const cover=el('button',{class:'btn',type:'button',onclick:()=>{word.classList.add('hid');inp.focus()}},'Cover');
+    if(ex.dictation)word.textContent='•••';
+    const row=el('div',{class:'spellrow'},say,ex.dictation?null:word,ex.dictation?null:cover,inp);
+    ol.append(el('li',{},row));
+    ctrls.push({check(){inp.classList.remove('ok','no');const r=norm(inp.value)===norm(w);inp.classList.add(r?'ok':'no');if(!ex.dictation)word.classList.remove('hid');return r},
+      reveal(){inp.value=w;inp.classList.add('ok');word.classList.remove('hid');word.textContent=w},
+      reset(){inp.value='';inp.classList.remove('ok','no');if(ex.dictation){word.textContent='•••'}else word.classList.remove('hid')}})});
+  body.append(ol)};
+R.open=(ex,body)=>{
+  if(ex.prompts)body.append(el('ul',{class:'plain'},...ex.prompts.map(p=>el('li',{html:p}))));
+  if(ex.timer){const t=el('span',{class:'timer'},'0:00');let iv=null;
+    const run=(sec,label)=>{clearInterval(iv);let left=sec;const tick=()=>{t.textContent=label+' '+Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(left--<=0){clearInterval(iv);t.textContent=label+' — time!'}};tick();iv=setInterval(tick,1000)};
+    body.append(el('div',{class:'actions'},...ex.timer.map(([s,l])=>el('button',{class:'btn',type:'button',onclick:()=>run(s,l)},l+' '+Math.round(s/60*10)/10+' min')),el('button',{class:'btn',type:'button',onclick:()=>{clearInterval(iv);t.textContent='0:00'}},'Stop'),t))}
+  if(ex.write!==false){const id='ta-'+ex.id;const ta=el('textarea',{id,placeholder:ex.placeholder||'Write here…'});ta.value=store.get('draft:'+ex.id,'');
+    const wc=el('div',{class:'wc'});const upd=()=>{const n=(ta.value.match(/\b[\w'’-]+\b/g)||[]).length;wc.textContent=n+' words'+(ex.words?` · target ${ex.words[0]}–${ex.words[1]}`:'');wc.classList.toggle('good',!!ex.words&&n>=ex.words[0]&&n<=ex.words[1]);store.set('draft:'+ex.id,ta.value)};
+    ta.addEventListener('input',upd);upd();body.append(ta,wc)}
+  if(ex.checklist)body.append(el('ul',{class:'check'},...ex.checklist.map((c,i)=>{const id=`cl-${ex.id}-${i}`;return el('li',{},el('label',{for:id},el('input',{type:'checkbox',id}),c))})));
+  if(ex.model){const m=el('div',{class:'model',hidden:''},el('div',{class:'eyebrow'},ex.modelLabel||'Model answer'),...ex.model.map(p=>el('p',{html:p})));
+    body.append(el('div',{class:'actions'},el('button',{class:'btn',type:'button',onclick:e=>{m.hidden=!m.hidden;e.target.textContent=m.hidden?'Show model answer':'Hide model answer'}},'Show model answer')),m)}
+};
+R.quiz=(ex,body)=>{
+  const picks={};const ol=el('ol',{class:'items num'});
+  ex.items.forEach((it,qi)=>{const box=el('div',{class:'opts'});const btns=it.o.map((o,i)=>{const b=el('button',{type:'button','aria-pressed':'false',onclick:()=>{btns.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');picks[qi]=i}},el('span',{class:'k'},'ABC'[i]),el('span',{},o));return b});box.append(...btns);ol.append(el('li',{},el('div',{class:'q'},el('div',{html:it.q}),box)))});
+  const out=el('div',{class:'model',hidden:''});
+  body.append(ol,el('div',{class:'actions'},el('button',{class:'btn primary',type:'button',onclick:()=>{const c=[0,0,0];Object.values(picks).forEach(i=>c[i]++);const n=Object.keys(picks).length;if(n<ex.items.length){out.hidden=false;out.innerHTML=`<p>You have answered ${n} of ${ex.items.length} questions. Answer them all to see your result.</p>`;return}const max=Math.max(...c);const best=c.indexOf(max);out.hidden=false;out.innerHTML=`<div class="eyebrow">Your result · A: ${c[0]} · B: ${c[1]} · C: ${c[2]}</div><p><b>Mostly ${'ABC'[best]}s.</b> ${ex.results[best]}</p>`}},'See my result')),out)};
+
+
+/* ---------- emoji ---------- */
+const EM=(n,size)=>el('img',{class:'emo',src:'emoji/'+n+'.webp',alt:'',width:String(size||32),height:String(size||32),loading:'lazy'});
+const SEC_EMO={home:'rocket',a:'bullseye',b:'face_screaming_in_fear',c:'smiling_face_with_sunglasses',d:'trophy',g:'writing_hand',e:'graduation_cap'};
+const SCENES={home:['trophy','rocket','glowing_star','snow-capped_mountain','party_popper','1st_place_medal'],
+ a:['bullseye','snow-capped_mountain','spiral_calendar','fireworks','light_bulb','footprints'],
+ b:['face_screaming_in_fear','spider','flexed_biceps','open_book','person_climbing','running_shoe'],
+ c:['smiling_face_with_sunglasses','hugging_face','nerd_face','grimacing_face','red_heart','star-struck'],
+ d:['trophy','crown','microscope','woman_scientist','handshake','glowing_star'],
+ g:['writing_hand','memo','pencil','magnifying_glass_tilted_left','check_mark_button','key'],
+ e:['graduation_cap','alarm_clock','headphone','studio_microphone','1st_place_medal','hundred_points']};
+const SPOTS=[[8,14,96,-10],[38,52,74,8],[64,8,104,6],[22,120,64,12],[74,118,70,-12],[46,150,52,-4]];
+function scene(list){const d=el('div',{class:'scene','aria-hidden':'true'});list.slice(0,6).forEach((n,i)=>{const [x,y,sz,r]=SPOTS[i];const im=EM(n,sz);im.style.left=x+'%';im.style.top=y+'px';im.style.setProperty('--r',r+'deg');im.style.animationDelay=(-i*0.9)+'s';d.append(im)});return d}
+const EX_EMO={h1:'graduation_cap',a1:'brain',a2:'speech_balloon',a3:'fireworks',a4:'snow-capped_mountain',a5:'detective',a6:'laptop',a7:'check_mark_button',a8:'magnifying_glass_tilted_left',a9:'books',a10:'sparkles',
+ wa1:'light_bulb',wa2:'dog_face',wa3:'exploding_head',wa3b:'bullseye',wa5:'sparkles',wa5b:'1st_place_medal',wa5c:'writing_hand',
+ xa1:'puzzle_piece',xa2:'seedling',xa3:'rocket',xa4:'spiral_calendar',xa5:'detective',
+ b1:'flexed_biceps',b2:'anxious_face_with_sweat',b2p:'hugging_face',b3:'puzzle_piece',b4:'headphone',b5:'thinking_face',b6:'bookmark_tabs',b7:'open_book',b8:'check_mark_button',b9:'magnifying_glass_tilted_left',bio:'bar_chart',
+ b10:'speech_balloon',b11:'books',b12:'thinking_face',b13:'pencil',wb1:'bar_chart',wb2:'partying_face',wb3:'headphone',
+ xb1:'hugging_face',xb2:'running_shoe',xb3:'detective',xb4:'bookmark_tabs',xb5:'spider',
+ c1:'smiling_face_with_smiling_eyes',c2:'handshake',c3:'grimacing_face',c3b:'pencil',c4:'smiling_face_with_sunglasses',c5:'rocket',c6:'face_with_rolling_eyes',c7:'crown',c8:'pencil',c9:'magnifying_glass_tilted_left',c10:'writing_hand',c11:'paw_prints',
+ wc1:'artist_palette',wc2:'thinking_face',wc3:'puzzle_piece',wc4:'red_heart',wc5:'detective',wc6:'crayon',wc7:'light_bulb',
+ xc1:'nerd_face',xc2:'puzzle_piece',xc3:'hugging_face',xc4:'camera',xc5:'cat_face',
+ d1:'handshake',d2:'crown',d3:'globe_showing_europe-africa',d4:'studio_microphone',d5:'speech_balloon',d6:'microscope',d7:'trophy',d8:'envelope_with_arrow',
+ wd1:'puzzle_piece',wd2:'bookmark_tabs',wd3:'headphone',wd4:'envelope_with_arrow',xd1:'handshake',xd2:'1st_place_medal',xd3:'scroll',xd4:'pill',
+ g0:'key',g1:'pencil',g2:'gem_stone',g3:'magnifying_glass_tilted_left',g4:'alarm_clock',g5:'pencil',g6:'gem_stone',g7:'check_mark_button',g8:'alarm_clock',
+ xg1:'light_bulb',xg2:'woman_scientist',xg3:'thinking_face',xg4:'pushpin',xg5:'detective',
+ e1:'spider',e2:'anxious_face_with_sweat',e3:'star-struck',e4:'memo',e5:'headphone',e6:'studio_microphone',e7:'alarm_clock',e8:'speech_balloon',e9:'glowing_star'};
+const STRIPS={a1:['thinking_face','brain','light_bulb','compass','sparkles'],a7:['bullseye','ladder','1st_place_medal','footprints','snow-capped_mountain'],
+ b4:['running_shoe','backpack','mosquito','footprints','grimacing_face'],b10:['speech_balloon','headphone','pencil','magnifying_glass_tilted_left','check_mark_button'],
+ wb3:['partying_face','star-struck','face_with_rolling_eyes','smiling_face_with_smiling_eyes','clapping_hands'],
+ xb5:['spider','bird','dog_face','snow-capped_mountain','studio_microphone'],
+ c1:['smiling_face_with_smiling_eyes','grimacing_face','nerd_face','hugging_face','face_with_rolling_eyes'],
+ xc1:['face_with_rolling_eyes','hugging_face','gem_stone','alarm_clock','grimacing_face'],
+ wd3:['artist_palette','crayon','red_heart','globe_showing_europe-africa','bicycle'],
+ xd2:['trophy','folded_hands','flexed_biceps','glowing_star','crown'],
+ g4:['alarm_clock','person_running','spiral_calendar','mobile_phone','check_mark_button'],
+ xg1:['person_running','laptop','alarm_clock','dog_face','fire'],
+ e1:['spider','bird','duck','face_screaming_in_fear','shield'],
+ e5:['laptop','books','camera','mobile_phone','victory_hand'],
+ e6:['studio_microphone','waving_hand','speech_balloon','smiling_face_with_smiling_eyes','alarm_clock']};
+function exEmo(ex){if(EX_EMO[ex.id])return EX_EMO[ex.id];if(ex.audio)return 'headphone';return {quiz:'brain',spell:'magnifying_glass_tilted_left',rewrite:'pencil',strike:'detective',select:'puzzle_piece',choice:'light_bulb',gap:'pencil',mcq:'thinking_face',open:'writing_hand'}[ex.type]||'sparkles'}
+function burst(at,full){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const list=full?['party_popper','sparkles','glowing_star','hundred_points','partying_face','red_heart','star-struck','trophy']:['flexed_biceps','seedling','sparkles'];
+  list.forEach((n,i)=>{const im=EM(n,34);im.classList.add('burst');const a=(i/list.length)*Math.PI*2;im.style.setProperty('--dx',Math.round(Math.cos(a)*90)+'px');im.style.setProperty('--dy',Math.round(Math.sin(a)*60-40)+'px');im.style.setProperty('--rot',(i%2?25:-25)+'deg');at.append(im);setTimeout(()=>im.remove(),1200)})}
+
+/* ---------- card ---------- */
+const SRC={cb:['src-cb','Coursebook'],wb:['src-wb','Workbook'],x:['src-x','Extra']};
+const allEx=[];
+function card(ex){
+  const ctrls=[];const [cls,lab]=SRC[ex.src];
+  const star=el('span',{class:'star'+(scores[ex.id]===1?' on':''),title:'100% = gold star','aria-hidden':'true'},'★');
+  const c=el('article',{class:'ex',id:ex.id},
+    el('div',{class:'ex-top'},el('span',{class:'code '+cls},lab+' · '+ex.code),star),
+    el('h2',{},EM(exEmo(ex),34),el('span',{},ex.title)));
+  if(STRIPS[ex.id])c.append(el('div',{class:'strip','aria-hidden':'true'},...STRIPS[ex.id].map(n=>EM(n,78))));
+  if(ex.instr)c.append(el('p',{class:'instr',html:ex.instr}));
+  if(ex.img){const f=el('figure',{class:'fig '+(ex.imgMode||'wide')},el('img',{src:ex.img,alt:ex.imgAlt||'',loading:'lazy'}));if(ex.cap)f.append(el('figcaption',{},ex.cap));c.append(f)}
+  if(ex.tip)c.append(el('div',{class:'tip',html:ex.tip}));
+  if(ex.passage)c.append(el('div',{class:'passage',html:ex.passage}));
+  if(ex.audio)c.append(makePlayer(ex));
+  const body=el('div',{});c.append(body);
+  (R[ex.type]||(()=>{}))(ex,body,ctrls);
+  if(ctrls.length){const res=el('span',{class:'result'});
+    c.append(el('div',{class:'actions'},
+      el('button',{class:'btn primary',type:'button',onclick:e=>{const n=ctrls.filter(k=>k.check()).length;const full=n===ctrls.length;res.innerHTML='';res.append(EM(full?'hundred_points':(n>=ctrls.length/2?'flexed_biceps':'seedling'),24),`${n} / ${ctrls.length}`+(full?' · Perfect!':' · keep going'));res.classList.toggle('full',full);burst(e.target.parentNode,full);if(n===ctrls.length){scores[ex.id]=1;star.classList.add('on');store.set('scores',scores);updStars()}}},'Check'),
+      el('button',{class:'btn',type:'button',onclick:()=>{ctrls.forEach(k=>k.reveal());res.textContent='answers shown';res.classList.remove('full')}},'Show answers'),
+      el('button',{class:'btn',type:'button',onclick:()=>{ctrls.forEach(k=>k.reset());res.textContent=''}},'Reset'),res));
+  }
+  if(ctrls.length&&!allEx.includes(ex.id))allEx.push(ex.id);
+  return c;
+}
+</script>
+<script>
+const SECTIONS=[];
+const S=(o)=>SECTIONS.push(o);
+
+/* =================== HOME =================== */
+S({key:'home',nav:'Start',letter:'',title:'Start',ex:[
+{id:'h1',img:'img/grad.jpg',imgAlt:`A graduate smiling at a graduation ceremony`,imgMode:'wide',cap:``,src:'cb',code:'Before you start',title:'Milestones',type:'open',
+ instr:`Look at the photo on this page.`,
+ prompts:[`Describe what you can see in the photo.`,`How do you think the woman with the glasses feels, and why?`,`Why is this day important in the lives of the young people in the photo?`,`What other ‘milestones’ in life do we celebrate?`],
+ placeholder:`Make notes for your discussion…`}
+]});
+
+/* =================== A =================== */
+S({key:'a',nav:'Our outlook on life',letter:'A',eyebrow:'Section A',title:'Our outlook on life',
+blurb:'Goal setting, New Year resolutions, a blog about planning your life, context clues, dictionary skills and figurative language.',ex:[
+{id:'a1',src:'cb',code:'A1',title:'Quiz: what’s your outlook on life?',type:'quiz',
+ instr:`Do the quiz alone or in pairs. Choose the answer that is most like you, then see your result.`,
+ items:[
+ {q:`You are going to watch a film with some friends, and they say it’s your turn to pick the film. Do you:`,o:[`Tell someone else to choose – they might not like your choice.`,`Choose a film you love, hoping your friends will enjoy it too.`,`Choose a film you think your friends want to see.`]},
+ {q:`All your friends are signing up for a free scuba diving ‘taster day’. You’ve never tried scuba diving before. Do you:`,o:[`Make an excuse – you might not like it.`,`Go along – it might be fun.`,`Go, but only because you don’t want to be the odd one out.`]},
+ {q:`What do you watch online?`,o:[`Anything – it’s a way of killing time.`,`I choose things that interest me, but I limit my viewing time as I have other hobbies too.`,`I mainly watch videos that people have recommended – but I know I ought to be doing something more useful!`]},
+ {q:`How do you feel about making new friends?`,o:[`I already have some good friends and that’s enough for me.`,`I enjoy getting to know all sorts of people.`,`I think it’s important to expand your social circle.`]},
+ {q:`A friend texts you two minutes before an important family meal: they are very upset about a personal issue. Do you:`,o:[`Ignore the text for now – you’ll answer later.`,`Reply straightaway by text explaining you’ll call him/her later.`,`Tell your family you’ll be late, and call your friend.`]},
+ {q:`Do you plan ahead?`,o:[`Not really, I take life as it comes.`,`Making plans gives me a sense of purpose, but I like a few surprises too.`,`Yes, I like to set goals for myself and know exactly where I’m going.`]},
+ {q:`How do you deal with difficult situations?`,o:[`I avoid the kind of situations that may hurt me.`,`If a situation is upsetting me, I walk away.`,`I try not to let things get me down: I face them and deal with them.`]},
+ {q:`How do you decide what to wear?`,o:[`I’m not interested in clothes, so I don’t give it much thought.`,`I choose the clothes that are most comfortable and practical.`,`I try to be fashionable.`]},
+ {q:`You forget to turn up for an important school meeting. How do you feel?`,o:[`Upset that none of your friends reminded you.`,`Disappointed, but next time you’ll set a phone reminder.`,`Annoyed with yourself for being so stupid.`]},
+ {q:`What motivates you most to do well at school?`,o:[`Future job prospects.`,`Personal satisfaction.`,`Making my family proud.`]}],
+ results:[`You like to play things safe: maybe try taking a few risks? Be less passive, and think about what you really want. Ask yourself whether you would get more from life if you took a bit more responsibility for yourself and your own happiness.`,
+ `Generally, you seem to be a happy, chilled and well-balanced kind of person; you take notice of other people’s opinions, but you don’t let them tie you down. You live your own life and you know what you want – and you cope well when things don’t go your way.`,
+ `You tend to put a lot of pressure on yourself because you are very conscious of what other people think of you. Be a bit kinder to yourself and a bit more relaxed – maybe you’re trying too hard to be perfect.`]},
+{id:'a2',src:'cb',code:'A2',title:'Discussion: knowing what you want',type:'open',
+ prompts:[`The quiz talks about knowing what you want in life. Do you think it is possible to live your life entirely in the way that you want? What are the secrets to a happy life?`,`Do you like to set goals for yourself? Why / why not? Do you write down your goals, or are they in your head?`,`Think of an example of a goal that you set for yourself that you achieved. What was it, and how did you feel when you achieved it?`]},
+{id:'a3',img:'img/fireworks.jpg',imgAlt:`New Year fireworks over a city`,imgMode:'wide',cap:``,src:'cb',code:'A3',title:'New Year resolutions',type:'open',
+ instr:`<b>Critical thinking.</b> In many parts of the world people set New Year resolutions (personal goals) at the beginning of each year. Which of these do you think are the five most popular? Put them in order 1–5 and give reasons.`,
+ prompts:[`Spend more time with relatives · Get more sleep · Travel more · Change your lifestyle to help the environment · Take up a new hobby or learn a new skill · Do more exercise and improve your fitness · Get a better job · Do some volunteering or charity work · Spend less time on social media · Spend less money and save more · Eat more healthily · Work harder`,`Can you think of any resolutions not on the list that would be popular in your country?`,`Research shows that most people fail to keep their resolutions for very long. Why do you think that is?`],
+ placeholder:`1. …  because …`},
+{id:'a4',img:'img/hiker.jpg',imgAlt:`A hiker standing on a mountain top above the clouds`,imgMode:'wide',cap:``,src:'cb',code:'A4',title:'Setting goals for the future',type:'open',
+ tip:`<b>Useful sentence starters:</b> My goal is to… · My dream is to… · I hope to… · I’d love to… · I’m determined (not) to… · I’m (not) going to…`,
+ prompts:[`Write one or two sentences about your hopes, dreams and plans for: learning English · education in general · travel · career · work-life balance.`,`Just for fun, think of a ‘pipe dream’ – a dream that is completely unrealistic (e.g. <i>My dream is to live in the first colony on Mars</i>).`]},
+{id:'a5',src:'cb',code:'A5',title:'Context clues: what is a “plokzack”?',type:'mcq',
+ instr:`<i>Plokzack</i> is not a real English word. Use the context to decide what it might mean in each sentence.`,
+ items:[
+ {q:`She got a <b>plokzack</b> for driving the wrong way down a one-way street.`,o:[`a fine / penalty`,`a medal`,`a new car`],a:0,e:`Clue: she broke a driving rule, so it is a punishment.`},
+ {q:`Older mobiles tend to <b>plokzack</b> more quickly than newer ones.`,o:[`ring`,`run out of battery / stop working`,`become popular`],a:1,e:`Clue: older phones are compared with newer ones – something that gets worse with age.`},
+ {q:`We can assure the public that we have tested our new vaccine <b>plokzackly</b> so it’s absolutely safe.`,o:[`quickly`,`thoroughly / carefully`,`secretly`],a:1,e:`Clue: the -ly ending makes it an adverb, and “absolutely safe” needs careful testing.`}]},
+{id:'a6',img:'img/haleena.jpg',imgAlt:`Haleena K, the blogger`,imgMode:'side',cap:`Haleena K – the writer of the blog`,src:'cb',code:'A6',title:'Reading for gist: “Plan your life – or not?”',type:'mcq',
+ instr:`Read the blog quickly to get the general idea, then answer the questions.`,
+ passage:`<div class="meta">HALEENA K · MAKE EVERY DAY COUNT · 8 January 2022</div><h3>Plan your life – or not?</h3>
+<p>Some of you have been asking for my tips on how to set goals (yes, it’s that time of year!). I find it interesting that, when we were five, our teachers gave us gold stars and smiley face stickers for reaching our targets – and that habit of wanting to ‘tick off’ our progress on a chart has never really left us! So, let’s talk about goal setting.</p>
+<p>A cousin of mine set his heart on studying law at a top university – to the surprise of his family as he had never been a high flyer at school. But he worked like crazy, got accepted at the university – and allowed himself one night of celebration before setting himself a new target: a first-class degree. There followed three years of head-down study (with zero social life), then he did a Master’s degree and more years of work… He had barely received his certificate before he disappeared to volunteer in a stray animal shelter in Malaysia, where he’s lived very happily ever since. It took him seven years to admit to himself that he loathed law: he just had to keep pursuing that next goal.</p>
+<p>OK, so don’t set the wrong goals in the first place – but sometimes it’s hard to be sure of what we really want until we get it. There’s nothing wrong with having aspirations and taking a few chances, but the secret is not to make the end goal itself the only thing that matters. Make sure you enjoy the process of getting there, and reward yourself for the small milestones you reach along the way. So if it turns out the destination itself isn’t what you thought you wanted, you haven’t made the journey for nothing.</p>
+<p>Another mistake we often make is to focus solely on that one small point on the horizon – our distant goal – without allowing ourselves to see things that unexpectedly enter our peripheral vision. (A bit like a wildlife photographer unsuccessfully scanning the sky all day for eagles and ignoring the rare butterfly that lands on her camera case.) Sometimes happiness comes from unexpected directions: keep your eyes and your mind open to opportunities.</p>
+<p>Remember, too, that you may not have the total control over your goals that you think you do. All sorts of obstacles can hold you back (family issues, illness, money), or your schedule may be unrealistic. (If you’ve never run before, you’re not going to complete a marathon next week!) The key here is flexibility – and not to beat yourself up. Be honest with yourself – and move the goalposts. Move them as often as you like!</p>`,
+ items:[
+ {q:`What type of text is it?`,o:[`a news report`,`a personal blog post`,`a formal letter`],a:1,e:`It has a date, the writer’s name and the blog title; it talks directly to readers.`},
+ {q:`What is its purpose?`,o:[`to give advice about setting goals`,`to sell a planning app`,`to report research about goals`],a:0},
+ {q:`Who is it written for (the ‘audience’)?`,o:[`law students`,`the writer’s regular readers, who asked for tips`,`teachers of young children`],a:1,e:`“Some of you have been asking for my tips…”`},
+ {q:`What sort of person might have written it?`,o:[`a lifestyle blogger sharing her own experience`,`a university professor`,`a journalist interviewing an expert`],a:0}]},
+{id:'a7',src:'cb',code:'A7',title:'Comprehension check',type:'mcq',inline:true,
+ instr:`True or false? Find the words in the blog that give you the answer.`,
+ items:[
+ {q:`We set goals and tick them off because we learnt to do this at an early age.`,o:[`True`,`False`],a:0,e:`“…that habit of wanting to ‘tick off’ our progress on a chart has never really left us!”`},
+ {q:`The writer thinks his cousin was wrong to have a goal.`,o:[`True`,`False`],a:1,e:`She thinks the problem was pursuing goals without asking what he really wanted – not having a goal.`},
+ {q:`The writer thinks you should break down big goals into smaller sections.`,o:[`True`,`False`],a:0,e:`“…reward yourself for the small milestones you reach along the way.”`},
+ {q:`The writer thinks it’s important to stick with your goals and not change them.`,o:[`True`,`False`],a:1,e:`“…move the goalposts. Move them as often as you like!”`}]},
+{id:'a8',src:'cb',code:'A8',title:'Style features',type:'select',
+ instr:`Which style feature does each quotation from the blog show?`,
+ options:[`direct address to the audience`,`writer making connections with the reader (we/us)`,`writer sharing information about herself`,`informal, conversational language`],
+ items:[
+ {q:`“Some of you have been asking for my tips…”`,a:`direct address to the audience`},
+ {q:`“…when we were five, our teachers gave us gold stars…”`,a:`writer making connections with the reader (we/us)`},
+ {q:`“A cousin of mine set his heart on studying law…”`,a:`writer sharing information about herself`},
+ {q:`“But he worked like crazy…”`,a:`informal, conversational language`},
+ {q:`“If you’ve never run before, you’re not going to complete a marathon next week!”`,a:`direct address to the audience`},
+ {q:`“OK, so don’t set the wrong goals in the first place…”`,a:`informal, conversational language`}]},
+{id:'a9',img:'img/phone.jpg',imgAlt:`A student checking a word on his phone`,imgMode:'side',cap:``,src:'cb',code:'A9',title:'How helpful is your dictionary?',type:'mcq',
+ instr:`A good dictionary tells you much more than the meaning. Answer the questions about words from the blog (check in your own dictionary too).`,
+ items:[
+ {q:`<b>loathe</b> – How do you pronounce it?`,o:[`/ləʊð/ – rhymes with “clothe”`,`/lɒθ/ – rhymes with “cloth”`,`/luːθ/ – rhymes with “tooth”`],a:0},
+ {q:`<b>stray</b> – Does it belong to more than one grammatical class?`,o:[`No, only a verb`,`Yes – verb, noun and adjective`,`No, only an adjective`],a:1,e:`to stray (v), a stray (n), a stray dog (adj).`},
+ {q:`<b>vision</b> – Is it countable, uncountable or both?`,o:[`countable only`,`uncountable only`,`both`],a:2,e:`good vision (U) / a vision of the future (C).`},
+ {q:`<b>goalpost</b> – Which is an idiom with this word?`,o:[`to move the goalposts`,`to score the goalposts`,`to keep your goalposts`],a:0},
+ {q:`<b>beat yourself up</b> – Is this expression formal or informal?`,o:[`formal`,`informal`],a:1}]},
+{id:'a10',img:'img/football.jpg',imgAlt:`A girl kicking a ball towards the goalposts`,imgMode:'side',cap:`Literal goalposts – but what does “moving the goalposts” mean?`,src:'cb',code:'A10',title:'Figurative meanings',type:'select',
+ tip:`<b>Literal vs figurative.</b> Literally, a <i>high flyer</i> moves high through the air; figuratively, it is someone much more successful than others. <i>Moving the goalposts</i> figuratively means changing the rules for something (often a criticism).`,
+ instr:`Match the figurative language in each sentence with its meaning.`,
+ items:[
+ {q:`When she was offered the chance to work in New York, she <b>jumped at</b> the opportunity.`,a:`accepted it eagerly`},
+ {q:`Losing her grandmother’s ring <b>broke her heart</b>.`,a:`made her extremely sad`},
+ {q:`We’re <b>fighting</b> the authorities who want to close our village school.`,a:`strongly opposing`},
+ {q:`His face <b>broke into a smile</b> when he heard the good news.`,a:`suddenly started smiling`},
+ {q:`I’m tired of <b>battling with</b> staff who refuse to accept different working conditions.`,a:`arguing and struggling with`},
+ {q:`When I shop online, I always <b>keep my eye out for</b> a bargain.`,a:`watch carefully for`},
+ {q:`The hospital helpline was <b>flooded with</b> calls from worried people.`,a:`received a huge number of`}]},
+{id:'wa1',src:'wb',code:'WB A1',title:'Quick language check',type:'choice',
+ instr:`Choose the best word or phrase in each sentence.`,
+ items:[`George decided to take more responsibility [during|*for] his own happiness.`,`Alisha [give|*set] herself the goal of starting a business by the time she was 30.`,`Oskar’s New Year’s [*resolution|decision] was to start doing more exercise.`,`If you are really [confident|*determined] to achieve something, you’ll probably succeed.`,`I think that [*eating|eat] more fruit and vegetables is a good idea.`,`What’s the best way of [*dealing|sorting] with difficult situations?`,`Having a plan for each day helps to give me a real sense of [reason|*purpose].`,`Some people are highly [*motivated|encouraged] by the thought of earning lots of money.`,`Lizzie finally told me why [*she was|was she] feeling so miserable.`,`It’s often incredibly difficult [continuing|*maintaining] a work-life balance.`]},
+{id:'wa2',src:'wb',code:'WB A2',title:'Vocabulary check: Khalid the vet',type:'gap',para:true,
+ instr:`Use the words in the box to complete the text. You may need to change the form of some of the verbs.`,
+ bank:[`volunteer`,`flexibility`,`pursue`,`aspirations`,`honest`,`obstacles`,`rewards`,`focus`,`realistic`,`admit`,`process`],
+ items:[`Children’s {aspirations} often change as they get older – one minute they want to be a train driver, the next an astronaut. Khalid, however, knew from a young age that he wanted to become a vet. He realised that it would be a long and difficult {process} and that there would be lots of {obstacles} to overcome. Despite this, he {pursued} his goal with great determination.`,
+ `Every day at school, he {focused|focussed} on his studies. At weekends, he {volunteered} at a local veterinary surgery. He didn’t mind working for free, as he knew the experience offered many valuable {rewards} – essential experience with animals, improved chances of being {admitted} to the best university and some excellent contacts in the veterinary field, to name just a few.`,
+ `Khalid was successful in gaining entry to his preferred university and graduated two years ago. So what does Khalid say is the key to success? ‘I think {flexibility} is very important – being able to change your goals if you need to and adapt to any situation are great skills to have. Also, you have to be totally {honest} with yourself about what it is you really want and whether or not you can actually achieve it. Your goals have to be {realistic}, or you’ll never achieve them!’`]},
+{id:'wa3',src:'wb',code:'WB A3',title:'Reading for gist: A great thinker',type:'choice',
+ instr:`Read the text about Albert Einstein and choose the correct word from each pair.`,num:true,
+ items:[`How much do you know about Albert Einstein? If you’ve heard about him but don’t know much about his life and work, then read on! Scientists used to think that matter could not be created nor destroyed. However, in the first few years of the 20th century, Einstein came [out|*up] with a different idea.`,
+ `Einstein’s idea – his Theory of Relativity – was first proved [by|*in] 1932. Einstein showed us that a small amount of matter could be changed into a vast amount of energy. This made the development of nuclear energy [available|*possible].`,
+ `Born in 1879, Einstein was an unusual child; I was fascinated to learn that he didn’t speak until he was 3 years old! When he was 12, he [learnt|*taught] himself Euclidean geometry. He hated school, however, and at the age of 15, he used the fact that the family had moved house as an [*excuse|explain] for not going to school for a year.`,
+ `Einstein grew into a brilliant and [*imaginative|imagining] young man who was [*passionately|perfectly] interested in science. He was also a very lively correspondent and [did|*made] a point of replying to any letters he received from children.`,
+ `His intelligent, friendly face with its untidy mop of silvery hair is well-known, [apart|*yet] as a young man he had short, coal-black hair. The face of the Jedi Master Yoda in the Star Wars films was [copied|*inspired] by Einstein’s wise expression.`,
+ `Sadly, Einstein’s theories were used to develop nuclear weapons. Einstein never [*forgave|upset] himself for what his discoveries had led to. Shortly before he died in 1955, he wrote a letter urging scientists to unite to [predict|*prevent] the possibility of another nuclear war.`]},
+{id:'wa3b',src:'wb',code:'WB A3–4',title:'Audience, purpose and style of the Einstein text',type:'mcq',
+ items:[
+ {q:`The text about Albert Einstein is aimed at:`,o:[`scientists who wish to discover more about his work.`,`general readers who have an interest in science.`,`students who want to find out more about careers in science.`],a:1},
+ {q:`The purpose of the text is to:`,o:[`give a detailed description of Einstein’s greatest achievements.`,`suggest reasons why Einstein became such a great scientist.`,`provide a summary of Einstein’s personality, life and work.`],a:2},
+ {q:`Which phrase is an example of <b>direct address to the audience</b>?`,o:[`“How much do you know about Albert Einstein?”`,`“Born in 1879, Einstein was an unusual child”`,`“He hated school, however”`],a:0},
+ {q:`Which phrase shows the <b>writer sharing information about himself/herself</b>?`,o:[`“Scientists used to think…”`,`“I was fascinated to learn that he didn’t speak until he was 3”`,`“Sadly, Einstein’s theories were used…”`],a:1},
+ {q:`Which phrase is <b>informal, conversational language</b>?`,o:[`“then read on!”`,`“the development of nuclear energy”`,`“urging scientists to unite”`],a:0}]},
+{id:'wa5',src:'wb',code:'WB A5',title:'Figurative language',type:'select',
+ instr:`Replace the figurative language in bold with a word or expression that means the same.`,
+ items:[{q:`Irhaa was <b>bursting with pride</b> when she talked about the prize she had won.`,a:`very proud`},{q:`We got a <b>heart-breaking</b> letter giving an account of my grandmother’s illness.`,a:`very sad`},{q:`My fear of wasps was <b>rooted in</b> the experience of being stung when I was a child.`,a:`based on`},{q:`Her anger <b>melted away</b> when she saw how sorry the little boy was.`,a:`disappeared`},{q:`There were <b>echoes</b> of her own childhood in the novel she wrote.`,a:`reminders`},{q:`There was a <b>howling</b> wind all night.`,a:`very noisy`}]},
+{id:'wa5b',src:'wb',code:'WB A5 g–l',title:'Figurative expressions about goals',type:'select',
+ instr:`Match the figurative expressions to their meanings.`,
+ items:[{q:`move the goalposts`,a:`change ambitions, plans or targets`},{q:`beat yourself up`,a:`criticise yourself, usually unfairly`},{q:`keep an open mind`,a:`be able to accept a range of possibilities`},{q:`set your heart on something`,a:`have a single goal you really want to achieve`},{q:`be a high flyer`,a:`achieve far more than those in a similar position`},{q:`reach a milestone`,a:`achieve a goal you have set yourself`}]},
+{id:'wa5c',src:'wb',code:'WB A5 write',title:'Your own sentences',type:'open',instr:`Write sentences of your own using each of the figurative expressions: move the goalposts · beat yourself up · keep an open mind · set your heart on · be a high flyer · reach a milestone.`},
+/* extras */
+{id:'xa1',src:'x',code:'X A1',title:'Goal collocations',type:'choice',
+ instr:`Which verb goes with the noun? Choose the natural collocation.`,
+ items:[`She [made|*set] herself a goal of reading 20 books this year.`,`After years of training, he finally [*achieved|did] his ambition of running a marathon.`,`We [*reached|arrived] an important milestone: 1,000 subscribers!`,`It took a lot of hard work to [*overcome|overtake] all the obstacles.`,`Don’t give up – keep [*pursuing|following up] your dreams.`,`My sister has [*set her heart on|put her heart in] becoming a doctor.`,`He [*took|made] a big risk when he left his job to start a business.`,`I need to [do|*make] more of an effort with my Spanish.`,`They [*fulfilled|filled] their dream of sailing around the world.`,`If your schedule is unrealistic, you may [*fall behind|fall down] with your plans.`]},
+{id:'xa2',src:'x',code:'X A2',title:'Word families: success words',type:'gap',
+ instr:`Complete each sentence with the correct form of the word in brackets.`,
+ items:[`Winning the championship was her greatest {achievement}. (achieve)`,`His {determination} to succeed impressed everyone. (determine)`,`Money isn’t my main {motivation} – I just love the job. (motivate)`,`She is very {ambitious}: she wants to run the company one day. (ambition)`,`The project was a great {success}, and we all celebrated. (succeed)`,`He was a {successful} businessman by the age of 25. (succeed)`,`Be {realistic}: you can’t learn a language in a week! (real)`,`Working from home gives me more {flexibility}. (flexible)`,`What a {disappointing} result! We expected to win. (disappoint)`,`She has a strong sense of {purpose} in everything she does. (purposeful)`]},
+{id:'xa3',src:'x',code:'X A3',title:'Idioms about success and dreams',type:'mcq',
+ items:[
+ {q:`Becoming a pop star is just a <b>pipe dream</b> for most people. This means it is…`,o:[`a dream about music`,`a hope that will probably never come true`,`a plan for the near future`],a:1},
+ {q:`With your talent, <b>the sky’s the limit</b>! This means…`,o:[`you can achieve anything`,`you should become a pilot`,`you have reached your limit`],a:0},
+ {q:`I didn’t pass the test, but I won’t <b>beat myself up</b> about it. This means…`,o:[`I won’t hurt myself`,`I won’t criticise myself too much`,`I won’t try again`],a:1},
+ {q:`The company keeps <b>moving the goalposts</b>, so we never get a bonus. This means they…`,o:[`build a new football pitch`,`change the rules or targets`,`give up their goals`],a:1},
+ {q:`When the chance came, she <b>jumped at it</b>. This means she…`,o:[`was frightened by it`,`accepted it immediately and eagerly`,`refused it politely`],a:1},
+ {q:`He’s always been <b>a high flyer</b>. This means he…`,o:[`works as a pilot`,`is much more successful than most people`,`is afraid of heights`],a:1}]},
+{id:'xa4',src:'x',code:'X A4',title:'Talking about plans: verb patterns',type:'gap',
+ tip:`<b>Pattern:</b> hope / plan / would love / be determined + <b>to</b>-infinitive · look forward to / dream of / be thinking of + <b>-ing</b>. Negative: be determined <b>not to</b> do. <span class="ua">Після to-слів — інфінітив з to; після прийменника (to у look forward to, of) — форма -ing.</span>`,
+ items:[`My goal is {to pass} all my exams this summer. (pass)`,`I hope {to study} medicine at university. (study)`,`I’d love {to visit} Japan one day. (visit)`,`I’m determined {not to give up|not to give} up, even if it’s hard. (not / give)`,`I’m really looking forward to {starting} my new job. (start)`,`She dreams of {becoming} a professional dancer. (become)`,`We’re thinking of {moving} to the coast. (move)`,`I’m going {to join} a gym next month. (join)`]},
+{id:'xa5',src:'x',code:'X A5',title:'More context clues',type:'mcq',
+ instr:`<i>Flurbish</i> is not a real word. What could it mean in each sentence?`,
+ items:[
+ {q:`The film was so <b>flurbish</b> that half the audience fell asleep.`,o:[`exciting`,`boring`,`expensive`],a:1},
+ {q:`He <b>flurbished</b> the old bike so well that it looked brand new.`,o:[`repaired / restored`,`sold`,`broke`],a:0},
+ {q:`Take an umbrella – the forecast says it will <b>flurbish</b> all afternoon.`,o:[`be sunny`,`rain`,`be windy and dry`],a:1},
+ {q:`Unlike his <b>flurbish</b> brother, Tom is shy and rarely speaks in class.`,o:[`quiet`,`outgoing / talkative`,`tall`],a:1,e:`Clue: “Unlike” signals the opposite of shy.`}]}
+]});
+
+/* =================== B =================== */
+S({key:'b',nav:'Facing challenges',letter:'B',eyebrow:'Section B',title:'Facing challenges',
+blurb:'Fears and reassurance, people who overcame difficulties, Monica’s story of learning to read, and spelling strategies.',ex:[
+{id:'b1',src:'cb',code:'B1',title:'Discussion: challenges',type:'open',
+ instr:`<b>Critical thinking.</b> Have you ever faced these kinds of challenges? How did you feel? Do you believe it is possible to achieve anything if you ‘put your mind to it’?`,
+ prompts:[`Overcoming a fear (e.g. spiders, the dark, heights, deep water)`,`Giving up a habit (e.g. getting up late, spending too long staring at screens, procrastinating)`,`A hard physical challenge (e.g. swimming / walking / running a long distance)`]},
+{id:'b2',src:'cb',code:'B2',title:'Expressing fears',type:'mcq',inline:true,
+ tip:`<b>A:</b> I’ve got to recite a poem in front of the whole school.<br><b>B:</b> How do you feel about it?<br><b>A:</b> To tell you the truth, I’m a bit worried about it.<br><b>B:</b> Don’t worry. You’ll be fine. Everyone thinks you’re great!`,
+ instr:`Which expressions sound <b>most</b> fearful? Choose “strong” or “mild” for each.`,
+ items:[{q:`I feel sick every time I think about it.`,o:[`strong fear`,`mild worry`],a:0},{q:`To tell you the truth, I’m a bit scared about it.`,o:[`strong fear`,`mild worry`],a:1},{q:`I’m not really sure I can cope.`,o:[`strong fear`,`mild worry`],a:1},{q:`To be honest, I’m not sure I’ll be able to do it.`,o:[`strong fear`,`mild worry`],a:1},{q:`The thought of it bothers me a bit.`,o:[`strong fear`,`mild worry`],a:1},{q:`I’m terrified!`,o:[`strong fear`,`mild worry`],a:0}]},
+{id:'b2p',src:'cb',code:'B2 role-play',title:'Role-play: reassure your partner',type:'open',
+ tip:`<b>Reassuring someone:</b> There’s nothing to worry about. You’ll do a wonderful job. · You’ll be fine. Nothing can go wrong. · Things will be OK. We’re all supporting you. · Try not to worry. It might not be as hard as you think.`,
+ instr:`In pairs, one person explains what he/she has to do and how they feel; the other gives reassurance. Then swap. Write one of your dialogues below.`,
+ prompts:[`fear of taking an exam`,`fear of competing in a race or a match`,`fear of giving a talk in front of the school`,`fear of going to the dentist`]},
+{id:'b3',img:'img/shave.jpg',imgAlt:`A young man shaving`,imgMode:'side',cap:``,src:'cb',code:'B3',title:'Pre-listening: key words',type:'select',
+ instr:`Match the words with the definitions. Then guess what challenges the speakers might talk about.`,
+ items:[{q:`(finger) nail`,a:`thin hard covering on the end of a finger`},{q:`charity event`,a:`activity to raise money for those who need it`},{q:`shave`,a:`remove hair with a razor`},{q:`trail`,a:`walking path through the countryside`},{q:`mosquito`,a:`small insect that sucks blood`},{q:`stranger`,a:`person you don’t know`}]},
+{id:'b4',src:'cb',code:'B4',title:'Listening: how people react to challenges',type:'select',track:'Track 1.1',
+ instr:`Listen to the five speakers. Which speaker…?`,
+ options:[`Speaker 1`,`Speaker 2`,`Speaker 3`,`Speaker 4`,`Speaker 5`],
+ audio:[{who:'Speaker 1',v:0,t:`I used to bite my nails all the time, and I’d tried several times to give up, without success. I just didn’t seem to have the mental strength to quit. But when I was about 12, my mum promised she’d buy me a phone I really wanted if she didn’t have to see those horrible bitten nails anymore – and I stopped the habit within two days! So, unfortunately, that experience made me realise I’m much more likely to succeed at things when I’m promised some kind of reward.`},
+ {who:'Speaker 2',v:1,t:`I’ve always been the kind of person who likes to look like everyone else and not draw attention to herself. So when a friend decided to shave off all the hair on her head to raise money for a cancer charity event, she thought I was joking when I agreed to take on the same challenge myself. Surprisingly, I didn’t mind having my hair shaved – but walking into school next day was one of the hardest things I’ve ever done, as I was expecting people to laugh and stare at me. Everyone was really nice about it though.`},
+ {who:'Speaker 3',v:2,t:`In my head, there’s one of those photos that you see on social media of me screaming with terror and laughter as I throw myself off a very high platform with a rope tied around my feet. You know, those bungee jump things that people do to impress their friends, and then they buy the photo to prove they did it. What actually happened, sadly, is that I froze as I was standing on the platform, and I had to admit to myself that I just wasn’t brave enough to do it.`},
+ {who:'Speaker 4',v:3,t:`I’d always dreamed of walking the whole of the 450-kilometre King’s Trail in Sweden, north of the Arctic Circle. But when I finally did it, it was tougher than I’d imagined: I was exhausted from the long distances carrying a heavy backpack, wet from the constant rain showers and covered in mosquito bites! So you’d think that I would have been quite pleased when I finished it, wouldn’t you? But it was quite the opposite: there’s something magical about that place, and I wanted the trail to go on for ever.`},
+ {who:'Speaker 5',v:4,t:`It might be hard to believe this now, but as a kid I was really shy. Something that helped me to get over this was a trip to the UK to do a language course when I could speak hardly any English. One day, our teacher sent us out into the street to find some native English speakers to practise interviewing. You can imagine how nervous I was, approaching strangers, but I found myself talking to some lovely people – and that experience took away much of my fear and helped me believe in myself.`}],
+ items:[{q:`regrets that they couldn’t complete their challenge?`,a:`Speaker 3`},{q:`felt sad when their challenge was over?`,a:`Speaker 4`},{q:`thinks the challenge has made them more confident?`,a:`Speaker 5`},{q:`learnt something about themselves that they don’t like?`,a:`Speaker 1`},{q:`was surprised by other people’s reactions after they completed their challenge?`,a:`Speaker 2`}]},
+{id:'b5',src:'cb',code:'B5',title:'Pre-reading discussion',type:'open',
+ instr:`You are going to read about Monica, who didn’t learn to read until she was an adult. Discuss:`,
+ prompts:[`What everyday problems do you think not being able to read would present?`,`Why might someone who was unable to read not try to get help to learn?`,`What effect do you think not being able to read might have on them?`]},
+{id:'b6',src:'cb',code:'B6',title:'Vocabulary check',type:'select',
+ instr:`Match the words from the text with their meanings.`,
+ items:[{q:`stomach ache`,a:`a pain in your stomach`},{q:`bully (verb)`,a:`frighten or hurt a weaker person again and again`},{q:`illiterate`,a:`unable to read or write`},{q:`fool (verb)`,a:`trick someone into believing something untrue`},{q:`volunteer (noun)`,a:`a person who works without being paid`},{q:`let on (phrasal verb)`,a:`show that you know a secret`}]},
+{id:'b7',img:'img/fears.jpg',imgAlt:`Facing Fears – magazine article header`,imgMode:'wide',cap:``,src:'cb',code:'B7',title:'Reading: textual organisation',type:'select',
+ instr:`Read the text carefully and match each paragraph (1–7) with a heading.`,
+ passage:`<h3>Monica’s story</h3>
+<p><span class="pn">1</span>Monica Chand’s childhood memories are of terrible stomach aches each morning before school, of missing lessons through illness and falling so far behind that she understood little but did not dare to ask for help, and of silent misery as children bullied her. She says, ‘When I had Sally, 17 years ago, I was determined it would not be the same for her.’ She is sitting in her tidy flat, drinking tea. Sally, her teenage daughter, joins us.</p>
+<p><span class="pn">2</span>Monica is describing how it feels to be unable to read and write in a world where just about everything we do, and how we are judged, depends on our literacy skills. Few people, she says, realise what it means to be unable to read a road sign, safety instructions or the contents of a food packet, or how it feels when every form you have to fill in is an impossible task. Few understand what people do to disguise their inability to read and write. Monica explains, ‘I would have the names of places I wanted to go to written down, and then I’d show this and ask someone to help, explaining that I’d left my glasses at home or some such story. You get good at fooling other people, but you can’t fool yourself.’</p>
+<p><span class="pn">3</span>Her husband, Ravi, who died earlier this year, was unaware of her secret. She says, ‘I’d just ask him to do the things I couldn’t cope with and he accepted that. But it really came home to me when Sally was born. I felt very insecure as a mother, and as she grew up everyone around me was saying, “You must read to her.” I felt so stupid because I couldn’t.’ Even then she did not tell Ravi, although she smiles now and says, ‘I think he must have known in his heart of hearts, but he was such a sweet man he never let on. I made sure he did the reading with Sally – I’d say I had to cook dinner and that it was a good way for them to be close.’</p>
+<p><span class="pn">4</span>Things changed when Sally went to primary school, and Monica became a volunteer in the school, helping children. One morning the headteacher said they wanted to offer her a paid job as a helper. ‘I just froze. I knew that would involve reading and writing – the things I’d avoided so far. But the headteacher had recognised my problem. She did reading with me every day so that I could take the job. As I learnt, she put me in with older children, and I realised I could read and write. It was like a miracle.’</p>
+<p><span class="pn">5</span>Then Monica joined a parents’ group, and the new headteacher asked them to write a book for parents teaching their children. Monica says, ‘My first reaction was, “Ooh, I can’t do that,” but then I realised I could contribute – to help other parents like me.’ By now, she was doing a training course to become a parent-educator. ‘The day I got my certificate – the first in my life – Sally and I went out for a really nice meal to celebrate.’</p>
+<p><span class="pn">6</span>These struggles are in the past. Monica works in several schools and has just returned from a conference in Cyprus where she gave a presentation on involving parents in reading. She also has a highly successful blog, which gets thousands of hits from users who post comments about her inspirational ideas.</p>
+<p><span class="pn">7</span>Monica talks about her daughter, Sally. ‘Perhaps I pushed her harder than other parents because I knew what failing feels like, and I suppose I was living my life through her. But we were both bursting with pride the day she did really well in her exams. I was in tears in front of everyone at school.’ Sally is no less proud. She is sitting on the arm of the sofa near her mother, listening, and her smile is warm. She says, ‘I think it was brave of Mum. She’s also shown me how important it is to take opportunities when they come.’</p>`,
+ num:true,
+ items:[{q:`Paragraph 1`,a:`Unhappy school days`},{q:`Paragraph 2`,a:`Hiding the problem`},{q:`Paragraph 3`,a:`Sally’s birth`},{q:`Paragraph 4`,a:`Learning to read`},{q:`Paragraph 5`,a:`Qualifying as a parent-educator`},{q:`Paragraph 6`,a:`Monica’s work today`},{q:`Paragraph 7`,a:`Effects on Sally’s education`}]},
+{id:'b8',src:'cb',code:'B8',title:'Comprehension check: Monica',type:'mcq',
+ instr:`Read the text in B7 again and choose the best answer.`,
+ items:[
+ {q:`How do you think Monica felt at school?`,o:[`Embarrassed and lonely.`,`Angry and upset.`,`Scared and in pain.`],a:0,e:`She “did not dare to ask for help” and suffered “silent misery” while being bullied.`},
+ {q:`According to Monica, most people don’t really understand:`,o:[`How many people are illiterate.`,`What life is like if you are illiterate.`,`How to help people who are illiterate.`],a:1},
+ {q:`Why did Monica say she had left her glasses at home?`,o:[`To make strangers feel sorry for her.`,`To avoid admitting that she couldn’t read.`,`As a way of starting a conversation with a stranger.`],a:1},
+ {q:`How did Monica’s illiteracy affect her when Sally was young?`,o:[`She was terrified her husband would think she was stupid.`,`She felt annoyed that people were judging her.`,`She felt guilty that she couldn’t read to Sally.`],a:2},
+ {q:`The headteacher of the primary school offered Monica a paid job:`,o:[`because she didn’t realise Monica couldn’t read and write.`,`even though Monica couldn’t read and write.`,`because Monica couldn’t read and write.`],a:1},
+ {q:`Which statement about Sally can we <b>not</b> know from the text?`,o:[`Her mother put pressure on her to achieve at school.`,`Sally is confident about meeting challenges.`,`As a child, Sally guessed that her mother couldn’t read.`],a:2}]},
+{id:'b9',img:'img/talk.jpg',imgAlt:`A journalist interviewing a woman`,imgMode:'side',cap:``,src:'cb',code:'B9',title:'Text style and features',type:'mcq',inline:true,
+ instr:`Is each one a feature of the interview article about Monica?`,
+ items:[{q:`Much of it is written in the present tense (<i>She says…, She explains…</i>).`,o:[`Yes`,`No`],a:0},{q:`The setting of the interview is part of the article: we know where it takes place.`,o:[`Yes`,`No`],a:0},{q:`It has a ‘question + answer’ format.`,o:[`Yes`,`No`],a:1},{q:`It includes anecdotes about the interviewee’s life (in the third person).`,o:[`Yes`,`No`],a:0},{q:`It includes direct quotes from the interviewee.`,o:[`Yes`,`No`],a:0},{q:`It includes quotes from other members of the interviewee’s family or friends.`,o:[`Yes`,`No`],a:0},{q:`The interviewee is someone famous.`,o:[`Yes`,`No`],a:1},{q:`The interview has a particular ‘angle’: it focuses on one aspect of the interviewee’s life.`,o:[`Yes`,`No`],a:0},{q:`It includes factual information and ‘helpline’/website links.`,o:[`Yes`,`No`],a:1}]},
+{id:'bio',img:'img/graph.jpg',imgAlt:`Graph of global illiteracy rates 1990–2020 for males and females`,imgMode:'wide',cap:`Global illiteracy rates 1990–2020 (data from McGill University, Canada)`,src:'cb',code:'B9 graph',title:'International overview: global illiteracy',type:'open',
+ instr:`<b>Critical thinking.</b> The graph shows world illiteracy rates from 1990 to 2020. According to the graph, approximately what percentage of male and female adults could not read and write in 2020?`,
+ prompts:[`Why do you think more women than men are illiterate?`,`Do you think illiteracy is higher in younger or older adults? Why?`,`In what ways is literacy important for a country’s progress?`,`Do you think literacy rates in your own country are higher or lower than the average?`]},
+{id:'b10',src:'cb',code:'B10',title:'Pronunciation and spelling: -ate words',type:'spell',dictation:true,
+ tip:`In <i>date</i> and <i>translate</i> the ending -ate sounds like “eight”. In adjectives like <i>illiterate</i> and <i>chocolate</i> it has the weak schwa sound /ət/. <b>Definite</b> sounds the same but is spelt <b>-ite</b>. <i>Definitely</i> is one of the most commonly misspelt words in English!`,
+ instr:`Press ▶ Say, listen, and type the word you hear.`,
+ items:[`accurate`,`appropriate`,`desperate`,`separate`,`delicate`,`fortunate`,`considerate`,`definite`]},
+{id:'b11',img:'img/library.jpg',imgAlt:`Students working together on a laptop in a library`,imgMode:'side',cap:``,src:'cb',code:'B11',title:'Approaches to spelling',type:'open',write:false,
+ instr:`Which strategies do you use to help you spell? Tick them. Then compare as a class.`,
+ checklist:[`I remember how the word looks on the page (visual recall).`,`I use spelling rules and patterns (like qu- or -ight).`,`I break words into syllables (e.g. qua/li/fi/ca/tion).`,`I get spelling clues from words in the same family (know – knowledge; pleased – pleasure – unpleasant).`,`I make up silly ways of remembering (there’s a rat in sepa<b>rat</b>e; <b>b</b>ig <b>e</b>lephants <b>c</b>an <b>a</b>lways <b>u</b>nderstand <b>s</b>mall <b>e</b>lephants).`]},
+{id:'b12',src:'cb',code:'B12',title:'Why do we misspell words?',type:'select',
+ instr:`What makes each word extra hard to spell?`,
+ options:[`silent letter`,`double consonants`,`-ible not -able`,`unusual vowel group`,`spelling changes in the plural`,`-ite ending sounds like -ate`],
+ items:[{q:`cu<b>p</b>board`,a:`silent letter`},{q:`respons<b>ible</b>`,a:`-ible not -able`},{q:`b<b>eau</b>tiful`,a:`unusual vowel group`},{q:`a<b>cc</b>o<b>mm</b>odation`,a:`double consonants`},{q:`autum<b>n</b>`,a:`silent letter`},{q:`recei<b>p</b>t`,a:`silent letter`},{q:`ex<b>h</b>austed`,a:`silent letter`},{q:`defin<b>ite</b>ly`,a:`-ite ending sounds like -ate`},{q:`<b>w</b>rist`,a:`silent letter`},{q:`batter<b>ies</b> (battery)`,a:`spelling changes in the plural`}]},
+{id:'b13',src:'cb',code:'B13',title:'Look, say, cover, write, check',type:'spell',
+ tip:`<b>Look</b> at the word and find the tricky part. <b>Say</b> it in syllables, even as it looks (Wed-nes-day). <b>Cover</b> it. <b>Write</b> it from memory. <b>Check</b> – and repeat if wrong.`,
+ instr:`For each word: look, press Say, press Cover, then type it from memory and Check.`,
+ items:[`cupboard`,`responsible`,`beautiful`,`accommodation`,`autumn`,`receipt`,`exhausted`,`definitely`,`wrist`,`batteries`]},
+{id:'wb1',src:'wb',code:'WB B1',title:'Comparing information in charts',type:'mcq',inline:true,
+ passage:`<b>Feelgood factor</b> – percentage of 37-year-olds satisfied with life so far
+<div class="chart"><div class="r"><span>Very low literacy – men</span><div class="b m" style="width:50%">50</div></div><div class="r"><span>Very low literacy – women</span><div class="b w" style="width:45%">45</div></div><div class="r"><span>Good literacy – men</span><div class="b m" style="width:78%">78</div></div><div class="r"><span>Good literacy – women</span><div class="b w" style="width:76%">76</div></div></div>`,
+ instr:`True or false?`,
+ items:[{q:`Less than half the women who had low literacy skills were happy with their lives.`,o:[`True`,`False`],a:0,e:`45% – less than half.`},{q:`Men, overall, were more satisfied with their lives than women.`,o:[`True`,`False`],a:0,e:`50 > 45 and 78 > 76.`},{q:`More than three-quarters of men and women who had a good standard of literacy said they were happy with their lives.`,o:[`True`,`False`],a:0,e:`78% and 76% are both over 75%.`}]},
+{id:'wb2',src:'wb',code:'WB B2',title:'Pre-listening: laughter and humour',type:'gap',dropdown:true,
+ instr:`Complete the definitions using the words and phrases in the box.`,
+ bank:[`burst into laughter`,`roar with laughter`,`sense of humour`,`stony-faced`,`get into trouble`,`crack a smile`,`have a laugh`,`laugh along with`],
+ items:[`If you {burst into laughter}, it means you suddenly start laughing.`,`Your {sense of humour} is what you do and don’t find funny.`,`If you {crack a smile}, it means your face changes from serious to not serious.`,`If you {roar with laughter}, you laugh in a loud and uncontrolled way, often for a long time.`,`If you {have a laugh} with someone, you enjoy your time together in a non-serious way.`,`Someone who is {stony-faced} is not showing any emotion and is perhaps in a bad mood.`,`If you {laugh along with} someone, you share a joke or a funny moment with them.`,`If you {get into trouble}, it means you have problems with someone in authority.`]},
+{id:'wb3',src:'wb',code:'WB B3',title:'Listening: what makes you laugh?',type:'select',track:'Workbook Audio 1',
+ instr:`You will hear three people talking about what makes them laugh. Match a sentence with each speaker. There are two extra sentences you do not need – choose “not used”.`,
+ options:[`Speaker 1`,`Speaker 2`,`Speaker 3`,`not used`],
+ audio:[{who:'Speaker 1',v:0,t:`I think I have a similar sense of humour to most of my friends, especially my best friend. There’s nothing better than having a good laugh with someone – you somehow feel so much better afterwards. It occasionally causes problems, though, because for some strange reason, I find some serious situations, like school assemblies, incredibly funny. I can usually control my laughter, but from time to time, I can’t hold it in and end up getting into trouble. I’m not quite sure why I find things like that as amusing as funny films, but I do.`},
+ {who:'Speaker 2',v:1,t:`My best friend’s a bit of a mystery to me because I’ve hardly ever seen her laugh. Although I’m always laughing along with the rest of our friends when we’re watching a good comedy movie together, she just sits there as though it were a tragedy. We’re complete opposites, as I burst into laughter at more or less anything. I’m not quite sure why she’s like that, but I’m still hoping that one day I’ll find a way of getting her to crack a smile a bit more often.`},
+ {who:'Speaker 3',v:2,t:`I’ve noticed for a while now that when I go to the cinema with a group of friends to see something funny, they’ll laugh at the parts of the film that I just don’t find funny, and I’ll be roaring with laughter while they’re sitting there stony-faced. My best friend’s the exception, as he’s amused by the same scenes as me. It just goes to show that there’s nothing universal about humour – it’s as individual as all our other likes and dislikes.`}],
+ items:[{q:`A I generally laugh at different things to most of my friends.`,a:`Speaker 3`},{q:`B I sometimes laugh when I’m not supposed to.`,a:`Speaker 1`},{q:`C I don’t find most comedy films very funny.`,a:`not used`},{q:`D My best friend is always trying new things to make me laugh.`,a:`not used`},{q:`E It’s actually pretty easy to make me laugh.`,a:`Speaker 2`}]},
+/* extras */
+{id:'xb1',src:'x',code:'X B1',title:'Fear or reassurance?',type:'select',
+ instr:`Is each sentence expressing a fear or reassuring someone?`,options:[`expressing fear`,`reassuring`],
+ items:[{q:`I’m dreading it, to be honest.`,a:`expressing fear`},{q:`You’ve prepared really well – you’ll be brilliant.`,a:`reassuring`},{q:`I’ve got butterflies in my stomach.`,a:`expressing fear`},{q:`Don’t panic. Just take a deep breath.`,a:`reassuring`},{q:`I can’t stop thinking about what might go wrong.`,a:`expressing fear`},{q:`Whatever happens, we’re proud of you.`,a:`reassuring`},{q:`My legs turn to jelly whenever I think about it.`,a:`expressing fear`},{q:`It’ll all be over before you know it.`,a:`reassuring`}]},
+{id:'xb2',src:'x',code:'X B2',title:'Complete the dialogue',type:'gap',dropdown:true,
+ bank:[`tell you the truth`,`feel sick`,`cope`,`nothing to worry about`,`be fine`,`supporting`,`as hard as`],
+ items:[`<b>Leo:</b> I’ve got my driving test tomorrow. To {tell you the truth}, I’m really nervous.`,`<b>Mia:</b> Why? You’ve had loads of lessons.`,`<b>Leo:</b> I know, but I {feel sick} every time I think about the roundabouts. I’m not sure I can {cope}.`,`<b>Mia:</b> There’s {nothing to worry about}. You’ll {be fine}.`,`<b>Leo:</b> What if I stall the car?`,`<b>Mia:</b> Then you start it again! It might not be {as hard as} you think. And we’re all {supporting} you.`]},
+{id:'xb3',src:'x',code:'X B3',title:'Spot the correct spelling',type:'choice',
+ instr:`Choose the correct spelling.`,
+ items:[`I’m [definately|*definitely|definitly] coming to your party.`,`Please keep the two groups [seperate|*separate|separete].`,`We need to book [*accommodation|accomodation|acommodation] for the trip.`,`Did the shop give you a [reciept|*receipt|receit]?`,`She’s a very [responsable|*responsible|responcible] student.`,`It was a [*beautiful|beatiful|beautifull] sunset.`,`I was completely [exausted|*exhausted|exhosted] after the race.`,`My phone needs new [batterys|*batteries|batteris].`,`The leaves fall in [autum|*autumn|autunm].`,`It was very [*considerate|considerite|concidarate] of you to call.`]},
+{id:'xb4',src:'x',code:'X B4',title:'Vocabulary from Monica’s story',type:'select',
+ items:[{q:`<b>misery</b> (para 1)`,a:`great unhappiness`},{q:`<b>disguise</b> (para 2)`,a:`hide the truth about something`},{q:`<b>unaware</b> (para 3)`,a:`not knowing about something`},{q:`<b>insecure</b> (para 3)`,a:`not confident about yourself`},{q:`<b>froze</b> (para 4)`,a:`suddenly stopped and couldn’t move or react`},{q:`<b>contribute</b> (para 5)`,a:`give or add something to help`},{q:`<b>inspirational</b> (para 6)`,a:`making people want to do something good`},{q:`<b>bursting with pride</b> (para 7)`,a:`extremely proud`}]},
+{id:'xb5',src:'x',code:'X B5',title:'Phobias',type:'select',
+ instr:`Many phobia names come from Greek. Match each phobia to what people are afraid of.`,
+ items:[{q:`arachnophobia`,a:`spiders`},{q:`claustrophobia`,a:`closed spaces`},{q:`ornithophobia`,a:`birds`},{q:`acrophobia`,a:`heights`},{q:`aquaphobia`,a:`water`},{q:`glossophobia`,a:`public speaking`},{q:`cynophobia`,a:`dogs`},{q:`nyctophobia`,a:`the dark`}]}
+]});
+
+/* =================== C =================== */
+S({key:'c',nav:'Personal qualities',letter:'C',eyebrow:'Section C',title:'Personal qualities',
+blurb:'Adjectives of personality, negative prefixes, guessing character from appearance, tentative criticism, describing people and homophones.',ex:[
+{id:'c1',img:'img/room.jpg',imgAlt:`A teenager in a very untidy bedroom`,imgMode:'side',cap:`Which adjective from the box fits her?`,src:'cb',code:'C1',title:'Describing people’s qualities',type:'select',
+ instr:`Is each word or phrase usually used in a positive sense, a negative sense, or does it depend? (For “it depends” words, discuss when they are good or bad.)`,
+ options:[`Positive`,`Negative`,`Neutral / It depends`],
+ items:[{q:`shy`,a:`Neutral / It depends`},{q:`outgoing`,a:`Positive`},{q:`absent-minded`,a:`Negative`},{q:`confident`,a:`Positive`},{q:`over-confident`,a:`Negative`},{q:`sensitive`,a:`Neutral / It depends`},{q:`quiet`,a:`Neutral / It depends`},{q:`ambitious`,a:[`Positive`,`Neutral / It depends`]},{q:`considerate`,a:`Positive`},{q:`obstinate`,a:`Negative`},{q:`narrow-minded`,a:`Negative`},{q:`open-minded`,a:`Positive`},{q:`trustworthy`,a:`Positive`},{q:`reliable`,a:`Positive`},{q:`has a good sense of humour`,a:`Positive`},{q:`keeps himself / herself to himself / herself`,a:`Neutral / It depends`},{q:`untidy`,a:`Negative`},{q:`generous`,a:`Positive`},{q:`argumentative`,a:`Negative`},{q:`laid back`,a:[`Neutral / It depends`,`Positive`]},{q:`judgemental`,a:`Negative`},{q:`cheerful`,a:`Positive`},{q:`grumpy`,a:`Negative`},{q:`imaginative`,a:`Positive`},{q:`calm`,a:`Positive`},{q:`friendly`,a:`Positive`},{q:`highly strung`,a:`Negative`},{q:`practical`,a:`Positive`}]},
+{id:'c2',src:'cb',code:'C2',title:'Vocabulary practice: choose the people',type:'open',
+ instr:`Choose three words from C1 for each scenario. Compare with a partner. How far do you agree?`,
+ prompts:[`A – your ideal flatmate`,`B – the worst possible flatmate!`,`C – the person you’d go with on a three-month working holiday abroad`,`D – the person you’d start a small business with`]},
+{id:'c3',src:'cb',code:'C3',title:'Negative prefixes',type:'gap',
+ instr:`Make the opposites by adding <b>dis-, im-, in-, ir-</b> or <b>un-</b>. Type the whole word.`,
+ tip:`<b>Rules of thumb:</b> <b>ir-</b> before r (irresponsible) · <b>im-</b> often before m or p (immature, impatient) · <b>il-</b> before l (illegal) · <b>un-</b> and <b>in-</b> are the most common – check a dictionary.`,
+ items:[`responsible → {irresponsible}`,`secure → {insecure}`,`efficient → {inefficient}`,`loyal → {disloyal}`,`trustworthy → {untrustworthy}`,`considerate → {inconsiderate}`,`mature → {immature}`,`reliable → {unreliable}`,`honest → {dishonest}`]},
+{id:'c3b',src:'cb',code:'C3.2',title:'Use the negative words',type:'open',instr:`Now put the negative words into sentences to show their meanings.`,placeholder:`It was irresponsible of him to leave the door unlocked…`},
+{id:'c4',img:'img/alex.jpg',imgAlt:`Alexander, a smiling young entrepreneur with a tablet`,imgMode:'side',cap:`Alexander, a successful entrepreneur`,src:'cb',code:'C4',title:'What are they like?',type:'open',
+ tip:`<b>He/She looks</b> + adjective: <i>She looks quite cheerful. He looks rather shy.</i><br><b>Compound adjective</b> with -looking: <i>A cheerful-looking woman answered the door. The new pilot was rather shy-looking.</i>`,
+ instr:`Look at this photo of Alexander, a successful entrepreneur. Make some guesses about his personality using <i>He looks…</i> or <i>-looking</i>.`,placeholder:`He looks…`},
+{id:'c5',src:'cb',code:'C5',title:'Demonstrating qualities through actions',type:'mcq',inline:true,
+ passage:`<p>Alexander was 17 when he started his own business selling mobile phones. He became a multi-millionaire at 21. Alex now shares his business skills to help others start their own small business, especially in areas of high unemployment. Here is what people who worked with him say:</p>
+<div class="bubble">When he’s deciding whether to invest in a business idea, he gets negative comments, such as ‘It’s not worth it, Alex; that project is a waste of money. The applicant is too uneducated to do well.’ But he doesn’t think like that. He believes everyone deserves a chance to succeed.</div>
+<div class="bubble">He has invested in small businesses with no guarantee of success, but he says that it was worth it because now, all over the world, people are running a business they are proud of.</div>
+<div class="bubble">He thinks there are still huge economic problems and lots of poverty. But he reminds us that if we make the world a fairer place, everyone will benefit.</div>
+<div class="bubble">When he hears about an exciting project, he’s filled with enthusiasm. He relies on colleagues saying, ‘Wait a minute Alex, you’ve got to do this or do that to avoid disaster.’</div>
+<div class="bubble">He thinks that encouraging people to believe in their future is vital. Even if others think he is too optimistic, he just has to do what he thinks is right.</div>`,
+ instr:`Can we draw these conclusions about Alex? Alex has…`,
+ items:[{q:`the courage to take risks`,o:[`Yes`,`No`],a:0},{q:`benefited from positive advice`,o:[`Yes`,`No`],a:1,e:`The advice he gets is negative, and he ignores it.`},{q:`bad memories he cannot forget`,o:[`Yes`,`No`],a:1},{q:`accepted stress as part of his life`,o:[`Yes`,`No`],a:1},{q:`support from people around him`,o:[`Yes`,`No`],a:0,e:`He relies on colleagues to warn him.`},{q:`trouble trusting others`,o:[`Yes`,`No`],a:1},{q:`self-belief`,o:[`Yes`,`No`],a:0},{q:`a positive outlook`,o:[`Yes`,`No`],a:0},{q:`determination`,o:[`Yes`,`No`],a:0},{q:`difficulty adjusting to change`,o:[`Yes`,`No`],a:1}]},
+{id:'c6',src:'cb',code:'C6',title:'Criticising negative qualities',type:'open',
+ tip:`We often use <b>tentative</b> language to avoid being too direct:<br><i>She’s immature.</i> → <i>She’s a bit immature at times.</i><br><i>He’s unreliable.</i> → <i>He’s not always very reliable.</i><br><i>He’s inconsiderate.</i> → <i>He can be rather inconsiderate.</i>`,
+ instr:`You are a colleague of Alex’s who admires him but doesn’t always agree with what he does. Write some slight criticisms of him, using the comments in C5. Would you criticise people this tentatively in your own language and culture?`,
+ placeholder:`He can be a bit too optimistic at times…`},
+{id:'c7',src:'cb',code:'C7',title:'Discussion: is Alex a role model?',type:'open',
+ prompts:[`Alex might be successful, but is he happy? What are your views?`,`Is there anything about Alex’s approach to life you would choose for yourself? Why?`,`Do you think Alex is a good example to younger people? Could he be a role model (a person who inspires others to copy them)?`]},
+{id:'c8',src:'cb',code:'C8',title:'Improving a description',type:'open',
+ passage:`<p>I’ve known my friend Shannon for six years. We met when we were both at primary school. We were ten. She had really long red hair. Her hair was wavy. It was tied back with a green ribbon. That’s the first thing I noticed about her.</p><p>Shannon is loyal, quiet, considerate, tidy, imaginative and cheerful. She used to be shy but now she’s more confident. She’s forgetful, too. There are some things I really admire about her.</p><p>She loves spiders. She wants to be an architect when she’s older.</p>`,
+ instr:`Does this description give you a good mental picture of Shannon? Rewrite it to make it better: link sentences, choose fewer adjectives and give examples.`,
+ model:[`I’ve known my friend Shannon for six years, since we were both ten and at primary school together. The first thing I noticed about her was her long, wavy red hair, which was always tied back neatly with a green ribbon – typical of such a tidy, organised person.`,`Shannon is incredibly loyal: when other girls teased me in my first week, she was the only one who sat with me at lunch. She used to be rather shy, but now she’s much more confident, and her imagination amazes me. She’s fascinated by spiders, of all things, and she wants to become an architect, designing buildings inspired by their webs!`,`She can be a little forgetful at times – she has left her phone on the bus more than once – but she’s always cheerful, and I really admire her.`]},
+{id:'c9',img:'img/hassan.jpg',imgAlt:`A smiling teenage boy`,imgMode:'side',cap:``,src:'cb',code:'C9',title:'Comparing style: Hassan',type:'mcq',inline:true,
+ passage:`<p>I’ve known Hassan since we met at a summer drama school as seven year olds, many years ago. I remember he was wearing red trousers and a bright-yellow woolly hat, which he never wanted to take off. This was typical of his loud and outgoing personality, and he’s still like that now!</p><p>Something people admire about Hassan is his ability to cheer people up when things go wrong. Last week he took a group of younger children for a football-themed birthday picnic in the countryside – but we forgot the footballs! So instead, Hassan entertained the kids with funny stories and organised a game of hide-and-seek, which they loved. He’s a good listener, too, so when I was upset because my dad was in hospital, he encouraged me to talk about how I was feeling. He’s very generous in giving up his time for other people, although he can be a bit unreliable with time-keeping in his own life. He’s always turning up late for meetings, cinema trips, even exams, which gets him into trouble sometimes – but then he’ll walk in with a lovely smile and everyone will forgive him!</p>`,
+ instr:`Which improvements does the Hassan description show, compared with the Shannon text?`,
+ items:[{q:`It gives specific examples of his behaviour.`,o:[`Yes`,`No`],a:0},{q:`It lists as many adjectives as possible.`,o:[`Yes`,`No`],a:1},{q:`It links his clothes to his personality.`,o:[`Yes`,`No`],a:0},{q:`It mentions a negative feature politely.`,o:[`Yes`,`No`],a:0},{q:`It uses mostly short, simple sentences.`,o:[`Yes`,`No`],a:1},{q:`It describes everything about his appearance.`,o:[`Yes`,`No`],a:1}]},
+{id:'c10',src:'cb',code:'C10',title:'Writing your own description',type:'open',words:[120,200],
+ instr:`Choose someone you know and describe them.`,
+ checklist:[`I chose just a few key characteristics and gave specific examples.`,`Physical features or clothes are linked with character traits.`,`I used some adjectives from C1 and C3, but didn’t overdo it.`,`I linked short sentences together.`,`I included one negative personality feature – politely!`]},
+{id:'c11',img:'img/homo.jpg',imgAlt:`A cat’s paws and milk being poured`,imgMode:'side',cap:`The two photos give you a clue to two more pairs of homophones (answer: paws / pause, pour / poor).`,src:'cb',code:'C11',title:'Spelling homophones',type:'strike',
+ tip:`A <b>homophone</b> sounds the same as another word but has a different spelling and meaning: <i>sea / see, write / right</i>.`,
+ instr:`Click the wrongly spelt word in each sentence, then type the correct word.`,
+ items:[{s:`You need *piece and quiet for your work.`,fix:`peace`},{s:`I read the *hole book in one evening.`,fix:`whole`},{s:`We’re not *aloud to stay out late.`,fix:`allowed`},{s:`They built the school on the *sight of an old factory.`,fix:`site`},{s:`They forgot to take *there shoes off when they entered my house.`,fix:`their`},{s:`If you don’t hurry, *your going to be late again.`,fix:`you're|you’re`},{s:`He hasn’t decided *weather to take the exam this year.`,fix:`whether`},{s:`You need to *bare in mind that summer evenings can be quite chilly.`,fix:`bear`},{s:`The car crashed because its *breaks failed.`,fix:`brakes`},{s:`His injury took a long time to *heel.`,fix:`heal`}]},
+{id:'wc1',src:'wb',code:'WB C1',title:'Describing character',type:'select',
+ instr:`Match each description with a word from the box. There is one you do not need.`,
+ options:[`sensitive`,`good-natured`,`placid`,`private`,`ambitious`,`optimistic`,`artistic`,`untidy`,`absent-minded`],
+ items:[{q:`My father tends to forget everyday things and often goes to work without his wallet or laptop.`,a:`absent-minded`},{q:`She gets on well with people and will offer to help you if you need it.`,a:`good-natured`},{q:`I don’t like sitting next to Lian. She leaves apple cores, sweet wrappers and old tissues all over her desk.`,a:`untidy`},{q:`Javier is very keen to have a successful career, and he regularly changes his job to improve his prospects.`,a:`ambitious`},{q:`Their new baby is only two months old, but he hardly cries at all.`,a:`placid`},{q:`The new manager is a very positive thinker and believes in a good future.`,a:`optimistic`},{q:`Eshe paints lovely pictures and has decorated her home beautifully.`,a:`artistic`},{q:`She doesn’t share her thoughts and feelings with anyone.`,a:`private`}]},
+{id:'wc2',src:'wb',code:'WB C2',title:'Vocabulary check: does it make sense?',type:'mcq',inline:true,
+ instr:`Think carefully about the words in bold. Does each sentence make sense?`,
+ items:[{q:`My grandfather is such a <b>bad-tempered</b> man – he’s always in a good mood.`,o:[`✓ makes sense`,`✗ doesn’t`],a:1},{q:`The radio presenter’s <b>grating</b> voice was pleasant to listen to.`,o:[`✓ makes sense`,`✗ doesn’t`],a:1},{q:`<b>Well-dressed</b> people have no interest in how they look.`,o:[`✓ makes sense`,`✗ doesn’t`],a:1},{q:`Gianna has always been <b>argumentative</b> – she’d quarrel with herself if she could!`,o:[`✓ makes sense`,`✗ doesn’t`],a:0},{q:`A <b>retired</b> person no longer works for a living.`,o:[`✓ makes sense`,`✗ doesn’t`],a:0},{q:`Tara took a lot of care over her clothes and make-up, and she always looked <b>scruffy</b>.`,o:[`✓ makes sense`,`✗ doesn’t`],a:1},{q:`The doctor told Wassim he was too <b>skinny</b> and should try to put on weight.`,o:[`✓ makes sense`,`✗ doesn’t`],a:0},{q:`Am I <b>ambitious</b>? Definitely. An ordinary life will give me more happiness than making a lot of money or getting a top job.`,o:[`✓ makes sense`,`✗ doesn’t`],a:1}]},
+{id:'wc3',src:'wb',code:'WB C3',title:'Negative prefixes: 16 words',type:'select',
+ instr:`Choose the prefix that makes each word into its opposite.`,options:[`dis-`,`il-`,`im-`,`in-`,`ir-`,`mis-`,`un-`],
+ items:[{q:`patient`,a:`im-`},{q:`legal`,a:`il-`},{q:`understand`,a:`mis-`},{q:`secure`,a:`in-`},{q:`responsible`,a:`ir-`},{q:`literate`,a:`il-`},{q:`correct`,a:`in-`},{q:`regular`,a:`ir-`},{q:`appear`,a:`dis-`},{q:`enthusiastic`,a:`un-`},{q:`conscious`,a:`un-`},{q:`significant`,a:`in-`},{q:`sympathetic`,a:`un-`},{q:`obey`,a:`dis-`},{q:`behave`,a:`mis-`},{q:`possible`,a:`im-`}]},
+{id:'wc4',src:'wb',code:'WB C4',title:'Commenting on positive and negative qualities',type:'gap',dropdown:true,para:true,
+ instr:`Exaggerate Nadine’s positive qualities and tone down the negative ones. Some words fit more than one gap.`,
+ bank:[`always`,`incredibly`,`rather`,`absolutely`,`by far`,`can be`,`so`,`a little bit`,`great`,`extremely`,`the best`,`slightly`],
+ items:[`Nadine’s my best friend and is {by far} the nicest person I know. She’s a nurse and is {incredibly|extremely|so} hard-working. She often works long shifts at the hospital but never complains about it. She’s also {extremely|incredibly|so} generous, with both her time and her money, and is willing to help {absolutely} anyone if she can.`,
+ `Sometimes, though, Nadine can be {a little bit|slightly|rather} unreliable if you make an arrangement with her. I’ve known her to be two hours late, for example, which can be {rather|slightly|a little bit} annoying. She {can be} {slightly|a little bit|rather} difficult to contact too, because she isn’t {the best|always great|great} at answering her phone!`,
+ `It’s a {great} privilege to know Nadine and I’m {so|extremely|incredibly} proud to be her friend!`]},
+{id:'wc5',src:'wb',code:'WB C5',title:'Sentence correction: extra word',type:'strike',
+ instr:`There is an extra word in each sentence. Click it to cross it out.`,
+ items:[{s:`I’m really lucky *for to know someone as talented as my friend Raphael.`},{s:`Rokia can sometimes seem a little bit *of rude, but she’s actually just shy.`},{s:`Hassan is one *out of the most intelligent people I know.`},{s:`Mathilde is always happy to do *that what she can to help others.`},{s:`I don’t think I’ve ever seen Hiroto without a smile on *top his face.`},{s:`Kasia and Karolina both *them enjoy spending lots of time outdoors.`}]},
+{id:'wc6',src:'wb',code:'WB C6',title:'Developing your writing style',type:'open',
+ passage:`<p>This is my grandmother. She is old. She is small. She has got fair skin. She has got brown eyes. She has white hair. She has a nice personality. She has got a bad leg. She smiles a lot but she has pains in her knee. She has arthritis. She paints pictures of things like birds, animals and flowers. She remembers my birthday. She buys me nice presents. She wears a gold locket around her neck. It is from my grandfather. He bought it for her when they got married. She likes it very much.</p>`,
+ instr:`Rewrite this social-media description using longer, more complex sentences.`,
+ model:[`This is my grandmother, a small, elderly lady with fair skin, warm brown eyes and soft white hair. Although she suffers from arthritis and often has pain in her knee, she is always smiling, and she has the kindest personality of anyone I know.`,`She spends her afternoons painting beautiful pictures of birds, animals and flowers, and she never forgets my birthday, always choosing a lovely present for me. Around her neck she wears a gold locket which my grandfather bought her when they got married, and it is clearly her most treasured possession.`]},
+{id:'wc7',src:'wb',code:'WB C7',title:'Homophones',type:'choice',
+ instr:`Choose the correct word from each pair.`,
+ items:[`Did you [worn|*warn] her about the storm that is forecast for tonight?`,`My grandfather [*fought|fort] in the Second World [Wore|*War].`,`Matthew [*ate|eight] all the food in the fridge.`,`The curtains I bought in the sale were reduced because there was a [floor|*flaw] in the material.`,`Let’s go to the beach this weekend, [weather|*whether] it rains or not.`,`‘Haven’t you [groan|*grown]!’ said Grandma when the children came to visit.`,`We worked really hard on the project and all needed a [*break|brake] afterwards.`,`I didn’t like the singer’s voice, but everyone else thought it was [grate|*great].`]},
+/* extras */
+{id:'xc1',src:'x',code:'X C1',title:'Who is it?',type:'select',
+ instr:`Choose the adjective that best describes each person.`,
+ options:[`argumentative`,`considerate`,`generous`,`grumpy`,`judgemental`,`laid back`,`narrow-minded`,`obstinate`,`reliable`,`highly strung`],
+ items:[{q:`Paolo never panics. Even when his flight was cancelled, he just shrugged and found a café.`,a:`laid back`},{q:`My neighbour complains about everything, especially in the mornings.`,a:`grumpy`},{q:`Once Elif has decided something, nothing will change her mind – even when she’s clearly wrong.`,a:`obstinate`},{q:`If Tom says he’ll be there at eight, he’ll be there at eight.`,a:`reliable`},{q:`Rosa always remembers to ask how your exams went and never plays loud music late at night.`,a:`considerate`},{q:`He forms an opinion about people the moment he meets them, usually a negative one.`,a:`judgemental`},{q:`She paid for everyone’s lunch and gave her old laptop to her cousin.`,a:`generous`},{q:`My uncle refuses to accept any ideas that are different from his own.`,a:`narrow-minded`},{q:`Ask Ivan anything and he’ll disagree, just for the sake of it.`,a:`argumentative`},{q:`Lena gets nervous and upset very easily, especially before tests.`,a:`highly strung`}]},
+{id:'xc2',src:'x',code:'X C2',title:'More negative prefixes',type:'gap',
+ instr:`Write the opposite of the word in brackets to complete each sentence.`,
+ items:[`Don’t be so {impatient}! The bus will be here in a minute. (patient)`,`It’s {impolite} to look at your phone while someone is talking to you. (polite)`,`My brother’s room is so {untidy} that you can’t see the floor. (tidy)`,`He’s very {disorganised}: he always forgets his homework. (organised)`,`Parking here is {illegal} – you’ll get a fine. (legal)`,`That argument is completely {illogical}. It makes no sense. (logical)`,`It was {insensitive} of her to joke about his illness. (sensitive)`,`The children were sent out because they {misbehaved} in class. (behaved)`,`I {disagree} with you completely. (agree)`,`The meeting was {unnecessary} – it could have been an email. (necessary)`]},
+{id:'xc3',src:'x',code:'X C3',title:'Tone it down',type:'choice',
+ instr:`Choose the more tentative (polite) version of each criticism.`,
+ items:[`About a classmate: [He’s lazy.|*He can be a bit lazy at times.]`,`About a colleague: [*She’s not always very punctual.|She’s always late.]`,`About your cousin: [He’s rude.|*He can come across as slightly rude.]`,`About a friend: [*She’s a little bit disorganised.|She’s a mess.]`,`About a teacher: [He’s boring.|*His lessons aren’t always very exciting.]`,`About a team-mate: [*He can be rather selfish with the ball.|He’s selfish.]`]},
+{id:'xc4',src:'x',code:'X C4',title:'-looking compound adjectives',type:'gap',
+ instr:`Complete each sentence with a compound adjective ending in <b>-looking</b>.`,
+ items:[`The man at the desk smiled warmly. He was a {friendly-looking|friendly looking} man. (friendly)`,`She had a frown and a red face – a very {angry-looking|angry looking} woman. (angry)`,`The guard was huge and wore dark glasses. A {frightening-looking|frightening looking|scary-looking} man. (frightening)`,`He was in a suit, carrying a briefcase: a {serious-looking|serious looking} businessman. (serious)`,`From his photo, Alex seems happy – <i>He {looks} cheerful.</i>`,`The new student kept her eyes on the floor. She {looked} rather shy.`]},
+{id:'xc5',src:'x',code:'X C5',title:'More homophones',type:'choice',
+ items:[`I can’t [*hear|here] you – the music is too loud.`,`[Who’s|*Whose] bag is this?`,`The dog wagged [it’s|*its] tail.`,`We [*knew|new] the answer straight away.`,`Turn [*right|write] at the traffic lights.`,`She [*threw|through] the ball over the fence.`,`I’d like a [peace|*piece] of cake, please.`,`It’s [to|*too] cold to swim today.`,`The [whole|*hole] in my sock is getting bigger.`,`[*They’re|Their|There] arriving at six.`]}
+]});
+
+/* =================== D =================== */
+S({key:'d',nav:'People we look up to',letter:'D',eyebrow:'Section D',title:'People we look up to',
+blurb:'Multi-word verbs for relationships, a podcast about admirable people, writing from notes, and a formal nomination email.',ex:[
+{id:'d1',img:'img/women.jpg',imgAlt:`Two women looking unhappy after an argument`,imgMode:'side',cap:``,src:'cb',code:'D1',title:'Multi-word verbs for relationships',type:'select',
+ instr:`Match the multi-word verb in bold with its meaning.`,
+ items:[{q:`Ivan really <b>looks up to</b> his stepmother: she’s a good influence on him.`,a:`admire and respect someone`},{q:`Unfortunately, some employers <b>look down on</b> applicants who haven’t studied at university.`,a:`think that you are better than someone`},{q:`He’s a very easy-going and open-minded person who <b>gets on with</b> everyone.`,a:`have a friendly relationship with someone`},{q:`Li Mei <b>takes after</b> her mother: they are both so argumentative!`,a:`be similar (in looks or behaviour) to a parent or relative`},{q:`She didn’t want to <b>let</b> her friends <b>down</b>, so she came to the wedding with a broken leg.`,a:`disappoint someone by not doing something`},{q:`My sister has <b>fallen out with</b> my mum again. They’re not talking to each other.`,a:`have an argument and stop being friendly`}]},
+{id:'d2',src:'cb',code:'D2',title:'Discussion: who do you look up to?',type:'open',instr:`Write down the names of three people you look up to. Why should these people be admired? Did you choose living people or historical figures?`},
+{id:'d3',src:'cb',code:'D3',title:'Pre-listening: glossary',type:'mcq',
+ tip:`<b>Dubai</b> – one of the seven emirates of the United Arab Emirates (UAE) · <b>Saudi Arabia</b> – a country in Western Asia · <b>Zhejiang</b> – a province in eastern China, next to the East China Sea · <b>Nobel prize</b> – one of six international prizes awarded each year (chemistry, physics, medicine, literature, peace, economics)`,
+ items:[{q:`What do we mean by <b>people with special needs</b>?`,o:[`people with a disability or condition who need extra help or support`,`people who need a lot of money`,`people who are very talented`],a:0},{q:`If someone is <b>named after</b> their mother, …`,o:[`they were given their mother’s name`,`they were born after their mother died`,`their mother chose their name`],a:0}]},
+{id:'d4',src:'cb',code:'D4',title:'Listening: podcast',type:'mcq',track:'Track 1.3',img:'img/tu.jpg',imgMode:'side',imgAlt:'Tu Youyou receiving the Nobel Prize',cap:'Tu Youyou was awarded the Nobel Prize in Physiology or Medicine in 2015.',
+ instr:`Listen to a podcast recorded for a student radio station. Choose the best answer for each question.`,
+ audio:[{who:'Interviewer',v:0,t:`OK, Yasmin, so we’re here to conduct the next in our series of podcasts on people we look up to. Yesterday we had an interesting discussion on the architect Zaha Hadid and her groundbreaking designs… Can you tell us whose achievements you’d like to talk about today?`},
+ {who:'Yasmin',v:1,t:`Well, I’m going to break the rules a little bit, if you don’t mind, because I couldn’t decide on a single person to focus on. It was really hard to narrow it down!`},
+ {who:'Interviewer',v:0,t:`Yes, I’m sure it was! Well, I think we can let you do that. So how did you choose in the end?`},
+ {who:'Yasmin',v:1,t:`You know, I got to thinking about why we admire people, and I realised it’s complicated. We can admire someone’s achievements without necessarily liking the way they went about doing what they did – or, on the other hand, we may admire a person’s courage or their originality, for example, without agreeing with their beliefs. And society changes, too – so we name a street or building after someone, and then a hundred years later, our values have changed and we’re questioning whether those people really deserve to be remembered in that way.`},
+ {who:'Interviewer',v:0,t:`I hadn’t really thought of it like that; that’s a good point. But you’ve decided on someone you feel you actually can look up to?`},
+ {who:'Yasmin',v:1,t:`OK, yes I have, two people, actually, who a lot of our listeners may not have heard of. I’d like to start off with a man from Dubai called Jalal Bin Thaneya – I heard about him from my mother, who comes from that part of the world. He’s completed some incredible physical challenges, including cycling 5000 kilometres from Oman to Jeddah in Saudi Arabia, and twice walking across all seven of the United Arab Emirates alone – that’s a distance of around 800 kilometres.`},
+ {who:'Interviewer',v:0,t:`Quite a long way, then!`},
+ {who:'Yasmin',v:1,t:`And you have to bear in mind that he would have been walking in extreme heat, on dusty, unpaved desert and mountain roads where there’s hardly anything to see, and with little food. As a long-distance walker myself, I can imagine how mentally tough that must have been. But what impresses me most actually, is that he’s raised huge amounts of money for various charities supporting people with special needs in the UAE, and generally he’s done a lot to make people more aware of the issues around disability. Now, it’s interesting that people often support a charity that has a particular connection with their own family, and that’s great… but Jalal Bin Thaneya has no reason to support those particular charities other than just wanting to help. He feels quite strongly that people don’t talk enough about some of the difficulties in society until those difficulties affect them personally.`},
+ {who:'Interviewer',v:0,t:`And you say you’re going to tell us about another person who impresses you as well?`},
+ {who:'Yasmin',v:1,t:`Yes, but for completely different reasons this time. For my own medical studies, I’d been finding out about how to look after patients suffering from malaria—`},
+ {who:'Interviewer',v:0,t:`The tropical disease spread by mosquitoes, right?`},
+ {who:'Yasmin',v:1,t:`Yes, exactly. Well, I was learning about that, and I found out about the Chinese scientist Tu Youyou, who discovered a very important anti-malaria drug called artemisinin, which comes from a tree. The work she did has helped save millions of people’s lives in China and South-East Asia generally, so I had to choose her.`},
+ {who:'Interviewer',v:0,t:`She won the Nobel Prize, didn’t she?`},
+ {who:'Yasmin',v:1,t:`Yes, that’s right, she did. Well, Tu Youyou was born in Zhejiang province in eastern China in 1930, and she trained as a pharmaceutical scientist during China’s Cultural Revolution, at a time when it really wasn’t easy to be a scientist.`},
+ {who:'Interviewer',v:0,t:`No, I can imagine.`},
+ {who:'Yasmin',v:1,t:`Thousands of people were dying of malaria, and there was a lot of pressure to find a treatment for it. She eventually found a clue to an effective cure by reading about ancient Chinese medicine in a text hundreds of years old. So she tried it out on herself and her team, which must have been pretty brave. Then she and the team had to create the drug, using some toxic chemicals which damaged their health. She didn’t get to see her family during this period, either, so she had to make quite a lot of personal sacrifices. And she got very little thanks or recognition for her work at the time – it wasn’t until she was in her seventies that people heard about her awards and began to take an interest.`},
+ {who:'Interviewer',v:0,t:`It sounds as if Tu Youyou deserves to be more well-known than she actually is – and it’s good that you’ve told us about her today.`},
+ {who:'Yasmin',v:1,t:`Yes, it’s not always the most famous people who most deserve our admiration, is it?`},
+ {who:'Interviewer',v:0,t:`No, I’d agree.`}],
+ items:[
+ {q:`According to Yasmin:`,o:[`we can’t admire someone if we don’t agree with their beliefs.`,`over time, we change the way that we judge people’s achievements.`,`we shouldn’t name streets or buildings after people who don’t deserve our admiration.`],a:1},
+ {q:`Yasmin understands how hard the walk across the seven Emirates is because:`,o:[`she has done it herself.`,`she has personal experience of similar activities.`,`she has a good imagination.`],a:1,e:`“As a long-distance walker myself…”`},
+ {q:`Yasmin says that Jalal Bin Thaneya wanted to complete his challenges in order to:`,o:[`improve the lives of people with special needs.`,`support people with special needs, including someone in his family.`,`make people realise that disability affects them personally.`],a:0,e:`He has “no reason to support those particular charities other than just wanting to help”.`},
+ {q:`According to Yasmin, what did Tu Youyou do that showed courage?`,o:[`She decided to look for a cure for malaria.`,`She worked away from her family.`,`She tested the new medicine on herself.`],a:2},
+ {q:`According to Yasmin, did Tu Youyou’s anti-malaria medicine make her famous?`,o:[`Not at first, but people found out about her many years later.`,`She was well-known at first, but now she’s forgotten.`,`It made her more famous than she deserves.`],a:0}]},
+{id:'d5',src:'cb',code:'D5',title:'Discussion: fame and admiration',type:'open',
+ prompts:[`Do you agree with Yasmin about admiring people? Can we admire someone’s work (their art or sports skills) if we dislike the way they lead their life?`,`Why do we put up statues of people? Would it be better not to?`,`Tu Youyou only became well-known when she was in her seventies. Do you know of other people who became famous only when they were very old, or after their death?`,`If you made an important discovery, would you want to be famous for it? What might be the advantages of not being well-known?`]},
+{id:'d6',img:'img/surgery.jpg',imgAlt:`Surgeons operating in a modern operating theatre`,imgMode:'side',cap:`Imagine this scene in the 1840s.`,src:'cb',code:'D6',title:'Writing from notes: Joseph Lister',type:'open',
+ passage:`<p><i>I want / describe Joseph Lister. He be / surgeon who / be born / England / 1827. In those days / many patients die / after operations because their wounds / become / badly infect. Lister wonder if / bacteria / air / which make / meat decay / also make / wounds septic.</i></p><p><i>Lister decide / clean / everything which touch / patient’s wounds / carbolic acid. Carbolic acid / destroy / all germs. As a result / these precautions / patients recover quickly / operations. The rate / infection / fall dramatically.</i></p><p><i>Lister develop / safe, antiseptic operations / which be / major medical advance. He receive / many awards / his work / and today / known as ‘the father of modern surgery’. I admire him because / he be dedicated / unselfish. He take / great personal risks / make this discovery. Surgery / use to be / highly dangerous. People be / terrify / surgeon’s knife. Lister change / all that. Modern surgery be / life-saver.</i></p><p class="meta">bacteria: organisms that cause disease · decay: go bad, rot · septic: badly infected · precautions: actions taken to avoid danger</p>`,
+ instr:`Write the description of Joseph Lister in full. Change the form of some words and add others.`,
+ model:[`I want to describe Joseph Lister. He was a surgeon who was born in England in 1827. In those days, many patients died after operations because their wounds became badly infected. Lister wondered if the bacteria in the air which made meat decay also made wounds septic.`,`Lister decided to clean everything which touched the patients’ wounds with carbolic acid. Carbolic acid destroyed all the germs. As a result of these precautions, patients recovered quickly from operations. The rate of infection fell dramatically.`,`Lister developed safe, antiseptic operations, which were a major medical advance. He received many awards for his work, and today he is known as ‘the father of modern surgery’. I admire him because he was dedicated and unselfish. He took great personal risks to make this discovery. Surgery used to be highly dangerous. People were terrified of the surgeon’s knife. Lister changed all that. Modern surgery is a life-saver.`]},
+{id:'d7',img:'img/wanted.jpg',imgAlt:`WANTED – nominations for Local hero of the year`,imgMode:'side',cap:``,src:'cb',code:'D7',title:'Looking for a ‘local hero’',type:'open',
+ passage:`<h3>WANTED: Nominations for the award of ‘Local hero of the year’</h3><p>Do you know someone who volunteers regularly to make a difference in our town? Or perhaps they have worked especially hard helping the public, always with a smile, and have never been thanked? Or maybe they did that one extra special brave or kind thing that deserves recognition?</p><p>Tell us about them, and they may win a prize at our ‘Local hero of the year’ ceremony! Let us know: • who they are and what they are like • what they do (or have done) that deserves an award.</p><p>Please email your nomination to the forum administrator.</p>`,
+ instr:`Think about who you might nominate, and why (you can make someone up). Make notes.`,placeholder:`Who? What are they like? What have they done?`},
+{id:'d8',img:'img/students.jpg',imgAlt:`Two students reading and discussing a draft`,imgMode:'side',cap:``,src:'cb',code:'D8–9',title:'Drafting your nomination',type:'open',words:[150,250],
+ tip:`<b>Structure.</b> <i>Introduction</i> – say why you are writing: <i>I am writing to nominate [the person] for… / I hope that you will consider [the person]…</i> · <i>Middle</i> – who the person is and what they do / have done · <i>Ending</i> – briefly summarise why they deserve the award.<br>Your reader is the forum administrator and other adults you don’t know: use a <b>formal, respectful</b> register.`,
+ checklist:[`The nomination is convincing – I would give this person the award.`,`The tone is suitable: not too informal, not too formal.`,`I checked spelling and apostrophes.`,`I used the three-part structure.`],
+ model:[`Dear Forum Administrator,`,`I am writing to nominate Mrs Olena Kovalenko for the award of ‘Local hero of the year’.`,`Mrs Kovalenko is a retired primary school teacher who lives on our street. For the past five years she has run a free homework club in the community centre every Tuesday and Thursday afternoon. Around twenty children attend each week, many of whom have parents working late. She helps them with reading and maths, and she always brings fruit and biscuits that she pays for herself.`,`Mrs Kovalenko is incredibly patient and kind. When my younger brother was struggling with reading and had lost all his confidence, she spent extra time with him every week. Now he reads books for pleasure. Many other families have similar stories.`,`She has never asked for any thanks, which is exactly why I believe she deserves this recognition. I hope that you will consider her for the award.`,`Yours faithfully,<br>Iryna Berezka`],modelLabel:'Model nomination'},
+{id:'wd1',src:'wb',code:'WB D1',title:'Multi-word verbs: the missing word',type:'gap',
+ instr:`A word is missing from each multi-word verb. Write it in.`,
+ items:[`Olivier really takes {after} his father – they look very similar.`,`Chioma’s very sociable and gets {on|along} well with more or less everyone she meets.`,`Alessandro’s really upset because he’s fallen {out} with his best friend.`,`Pernille treats everyone as though they’re equal – she doesn’t look down {on} anyone.`,`Ding is someone who will never let you {down} – he’s very reliable.`,`I look {up} to both of my grandparents as they’re both wonderful, kind people.`,`Asha and Olga had a massive argument, but made up {with} each other a day later.`,`Jimmy is very cheeky, but he gets {away} with it because he’s so charming as well.`]},
+{id:'wd2',src:'wb',code:'WB D2',title:'Pre-listening: Frida Kahlo',type:'select',
+ items:[{q:`heritage`,a:`the culture or country that someone comes from`},{q:`inhabitant`,a:`a person who lives in a particular place`},{q:`urge`,a:`to encourage someone to do something`},{q:`recover`,a:`to get better after an illness or accident`},{q:`authorities`,a:`the government or organisations that have power`},{q:`shortage`,a:`not enough of something`},{q:`interpret`,a:`to decide what the meaning of something is`},{q:`setback`,a:`a difficulty or problem experienced in life`}]},
+{id:'wd3',src:'wb',code:'WB D3',title:'Listening: a talk about Frida Kahlo',type:'mcq',track:'Workbook Audio 2',
+ instr:`You will hear a student giving a talk about a Mexican artist called Frida Kahlo. Choose the correct answer.`,
+ audio:[{who:'Student',v:1,t:`Hi everyone, and welcome to my talk about the incredible Mexican artist Frida Kahlo. She came from a family of mixed heritage; her mother’s side of the family being a combination of Spanish and Amerindian – the original inhabitants of North, Central and South America – while the other side of the family had arrived in Mexico from Germany several years before.`},
+ {who:'Student',v:1,t:`Frida caught a serious disease called polio when she was just six years old. This made walking very hard for her, at least to begin with, but her father urged her to take up swimming and even soccer to help develop her strength again. Frida later wrote that her relationship with her father was extremely close, so she was keen to follow his advice.`},
+ {who:'Student',v:1,t:`When she was 18, Frida was on her way home from school when the bus she was in crossed in front of a tram, which unfortunately hit the side of the bus. Many passengers climbed from the wrecked bus with minor injuries, but Frida was badly hurt. It was while recovering from the accident that Frida started painting seriously.`},
+ {who:'Student',v:1,t:`Frida got married to a famous artist called Diego Rivera in 1929, and they moved to the United States together in 1931. Even though their political beliefs occasionally got them into trouble with the authorities, they were both successful so had no shortage of money. However, she missed Mexico, so they decided to go back there in 1933.`},
+ {who:'Student',v:1,t:`Frida’s striking paintings are often interpreted as products of her imagination. Frida commented, however, that they were actually her way of showing visually the many different feelings she experienced in her life. She saw painting as the best way of expressing them, and her art came to be admired by many. So despite all of her setbacks in life, Frida achieved great success in her lifetime and is often described as one of the most important artists of the 20th century.`}],
+ items:[{q:`Frida’s father’s family were originally from`,o:[`South America`,`Germany`,`Spain`],a:1},{q:`Frida was encouraged to ___ while recovering from an illness called polio.`,o:[`do sport`,`try writing`,`go walking`],a:0},{q:`Frida had an accident while ___, which left her in a lot of pain.`,o:[`climbing`,`crossing the road`,`using public transport`],a:2},{q:`Frida returned to Mexico from the United States because she`,o:[`held strong political beliefs`,`was in poor health`,`felt homesick`],a:2},{q:`Frida says that her paintings were always about the many things she`,o:[`saw`,`felt`,`imagined`],a:1}]},
+{id:'wd4',src:'wb',code:'WB D4',title:'Draft and redraft a structured email',type:'open',words:[150,250],
+ passage:`<p><b>Notes:</b> Literacy very important: people’s happiness &amp; personal development + development of country · Research studies: people unable read/write → more likely dissatisfied with lives + lack confidence + find getting job difficult · In addition: can’t help their children (schoolwork) / play active part in community · Find ordinary things difficult (read newspapers / fill in forms) · Many not use internet / social media · Some feel ashamed – cover up problems / pretend can read · Very important these people get help · In our area: literacy scheme – help adults improve reading / writing skills · Schemes like this → help government achieve goal (100 percent literacy our country)</p>`,
+ instr:`Vicki Sansa is writing to a newspaper about improving literacy standards. Use the notes to write the full email. Begin <i>Dear Editor,</i> and end <i>Yours faithfully,</i>.`,
+ model:[`Subject: Re: Improving literacy standards`,`Dear Editor,`,`I am writing in response to your recent article on literacy. In my opinion, literacy is extremely important, not only for people’s happiness and personal development but also for the development of our country.`,`Research studies show that people who are unable to read and write are more likely to be dissatisfied with their lives. They often lack confidence and find getting a job difficult. In addition, they cannot help their children with schoolwork or play an active part in the community. They find ordinary things, such as reading newspapers or filling in forms, difficult, and many of them do not use the internet or social media. Some feel so ashamed that they cover up their problems or pretend that they can read.`,`It is therefore very important that these people get help. In our area there is a literacy scheme which helps adults to improve their reading and writing skills. Schemes like this will help the government achieve its goal of 100 percent literacy in our country.`,`Yours faithfully,<br>Vicki Sansa`]},
+/* extras */
+{id:'xd1',src:'x',code:'X D1',title:'Relationship verbs in context',type:'gap',dropdown:true,
+ bank:[`looks up to`,`looks down on`,`gets on with`,`takes after`,`let me down`,`fell out`,`made up`,`put up with`],
+ items:[`My little brother {looks up to} his football coach – he wants to be just like him.`,`Sara {takes after} her dad: they’re both tall and they both love maths.`,`Tom {gets on with} everyone in his class, so he’s never lonely.`,`We {fell out} over something silly, but we {made up} the next day.`,`He promised to help me move house but he didn’t turn up. He really {let me down}.`,`I can’t {put up with} this noise any longer!`,`She’s a snob: she {looks down on} anyone without an expensive car.`]},
+{id:'xd2',src:'x',code:'X D2',title:'Qualities we admire',type:'select',
+ instr:`Which quality does each person show?`,
+ options:[`courageous`,`dedicated`,`unselfish`,`determined`,`inspirational`,`modest`],
+ items:[{q:`Tu Youyou tested a new medicine on herself first.`,a:`courageous`},{q:`Lister spent years working on one problem until he solved it.`,a:`dedicated`},{q:`She gives all her free time to helping others and asks for nothing.`,a:`unselfish`},{q:`He failed the exam three times, but he refused to give up and passed on the fourth.`,a:`determined`},{q:`Her talk made the whole class want to start volunteering.`,a:`inspirational`},{q:`He won a Nobel prize but never talks about it.`,a:`modest`}]},
+{id:'xd3',src:'x',code:'X D3',title:'Formal or informal?',type:'select',
+ instr:`For the ‘Local hero’ nomination you need a formal register. Is each phrase formal or informal?`,options:[`formal – good for the nomination`,`informal – better for a friend`],
+ items:[{q:`I am writing to nominate…`,a:`formal – good for the nomination`},{q:`Hey! Guess who deserves a prize?`,a:`informal – better for a friend`},{q:`She has made a remarkable difference to our community.`,a:`formal – good for the nomination`},{q:`He’s, like, the coolest guy ever.`,a:`informal – better for a friend`},{q:`I hope that you will consider her for the award.`,a:`formal – good for the nomination`},{q:`Yours faithfully,`,a:`formal – good for the nomination`},{q:`Cheers, see you soon!`,a:`informal – better for a friend`},{q:`For these reasons, I believe he fully deserves this recognition.`,a:`formal – good for the nomination`}]},
+{id:'xd4',src:'x',code:'X D4',title:'Lister: verb forms',type:'gap',
+ instr:`Put the verbs in the correct form (past simple, passive or present).`,
+ items:[`Joseph Lister {was} a surgeon who {was born} in England in 1827. (be / be born)`,`In those days, many patients {died} after operations. (die)`,`Their wounds often {became} badly {infected}. (become / infect)`,`Lister {wondered} if bacteria in the air caused the problem. (wonder)`,`He {decided} to clean everything with carbolic acid. (decide)`,`Today he {is known} as ‘the father of modern surgery’. (know – passive)`,`Surgery {used to be} highly dangerous. (use to / be)`,`People {were terrified} of the surgeon’s knife. (be / terrify)`]}
+]});
+
+/* =================== GRAMMAR =================== */
+S({key:'g',nav:'Grammar',letter:'G',eyebrow:'Language study & Grammar spotlight',title:'Apostrophes · Present simple and continuous',
+blurb:'The two grammar points of Unit 1, with the coursebook and workbook practice and extra drills.',ex:[
+{id:'g0',src:'cb',code:'D10',title:'Why the apostrophe?',type:'mcq',
+ tip:`We use an apostrophe (’) for two main purposes: to show where letters are <b>omitted</b> (contractions) and to show <b>possession</b>.<span class="ua">Апостроф: 1) пропущені літери (it’s = it is); 2) належність (Anna’s bag).</span>`,
+ items:[{q:`Someone<b>’s</b> put a lot of effort into this.`,o:[`letters omitted (someone has)`,`possession`],a:0},{q:`I found someone<b>’s</b> phone under the sofa.`,o:[`letters omitted`,`possession (the phone belongs to someone)`],a:1}]},
+{id:'g1',src:'cb',code:'D10.1',title:'Contracted forms',type:'gap',
+ instr:`Write the full (non-contracted) form of the words in bold.`,
+ items:[`<b>You’re</b> going to watch a film with friends. → {You are}`,`He disappeared to Malaysia, where <b>he’s</b> lived happily ever since. → {he has}`,`<b>Don’t</b> set the wrong goals in the first place. → {Do not}`,`<b>You’ll</b> be fine. → {You will}`,`When Ravi was alive, <b>I’d</b> ask him to do the things I couldn’t cope with. → {I would}`,`I explained that <b>I’d</b> left my glasses at home. → {I had}`,`<b>He’s</b> always turning up late for meetings. → {He is}`]},
+{id:'g2',src:'cb',code:'D10.2',title:'Possession: work out the rules',type:'mcq',
+ passage:`<p>These are my husband<b>’s</b> keys. · My brother<b>s’</b> names are Phil, Matt and Billy. · I spoke to the children<b>’s</b> favourite teacher. · You should listen to other people<b>’s</b> opinions.</p>`,
+ items:[{q:`Singular owner (husband):`,o:[`add ’s`,`add s’`],a:0},{q:`Regular plural owner ending in -s (brothers):`,o:[`add ’s (brothers’s)`,`add only ’ after the s (brothers’)`],a:1},{q:`Irregular plural not ending in -s (children, people, women, men):`,o:[`add ’s (children’s)`,`add only ’ (childrens’)`],a:0},{q:`“My brother’s names are Phil, Matt and Billy” means…`,o:[`I have one brother`,`I have three brothers`],a:0,e:`One brother with three names! For three brothers we write brothers’.`}]},
+{id:'g3',img:'img/signs.jpg',imgAlt:`Signs with apostrophe mistakes`,imgMode:'side',cap:``,src:'cb',code:'D10.3',title:'What’s wrong with the signs?',type:'mcq',
+ items:[{q:`<i>Please leave ALL trolley’s next to the supermarket exit.</i>`,o:[`trolley’s should be trolleys – a simple plural needs no apostrophe`,`ALL should be lower case`,`It should be trolleys’`],a:0},{q:`<i>Please note: our store has changed it’s opening hours.</i>`,o:[`it’s should be its – possessive its has no apostrophe`,`has should be have`,`It should be it’s’`],a:0,e:`it’s = it is / it has. its = belonging to it.`}]},
+{id:'g4',src:'cb',code:'Spotlight',title:'Present simple and continuous',type:'gap',
+ tip:`<b>Present simple</b> – facts, habits, things usually or always true: <i>I avoid the kind of situations that may hurt me.</i><br><b>Present continuous</b> – things happening now / around now: <i>Monica is describing how it feels… She is sitting in her flat.</i><br><b>Stative verbs</b> don’t usually take the continuous form: believe, belong, contain, know, like, love, mean, own, prefer, seem, suppose, understand, want, wish. <i>I don’t understand. Can you explain that again?</i><span class="ua">Present simple — звички й факти; present continuous — те, що відбувається зараз. Дієслова стану (know, like, want…) зазвичай не мають -ing.</span>`,
+ instr:`Complete the sentences with the correct present tense of the verb in brackets.`,
+ items:[`That’s strange – Josh {is arguing|'s arguing} with his friend Ken. He never normally {argues} with anyone. (argue)`,`You {seem} very quiet this morning. Are you OK? (seem)`,`Tanya is very generous. Helping other people {makes} her happy. (make)`]},
+{id:'g5',src:'wb',code:'WB D5',title:'Apostrophes: omission',type:'rewrite',prefill:true,
+ instr:`Add the missing apostrophes. Edit the sentence in the box.`,
+ items:[{q:`I havent decided what to wear to the party yet.`,a:`I haven't decided what to wear to the party yet.`},{q:`I wish youd be more careful. Youre always breaking things.`,a:`I wish you'd be more careful. You're always breaking things.`},{q:`Shes got a son, Rory, whos nine.`,a:`She's got a son, Rory, who's nine.`},{q:`Dont you think youd better wear a coat - its raining?`,a:[`Don't you think you'd better wear a coat - it's raining?`]},{q:`Lets meet soon for a coffee. Its ages since Ive seen you.`,a:`Let's meet soon for a coffee. It's ages since I've seen you.`},{q:`He doesnt know where theyve gone, does he?`,a:`He doesn't know where they've gone, does he?`},{q:`Arent you hot in that thick sweater?`,a:`Aren't you hot in that thick sweater?`},{q:`This coffees lost its flavour.`,a:`This coffee's lost its flavour.`}]},
+{id:'g6',src:'wb',code:'WB D5',title:'Apostrophes: possession',type:'rewrite',prefill:true,
+ tip:`Put the apostrophe after the ‘owner’. If the owner is plural and ends in -s, the apostrophe goes after the s: <i>the students’ books</i>.`,
+ items:[{q:`Hu Chengs parents carefully read his class teachers report.`,a:`Hu Cheng's parents carefully read his class teacher's report.`},{q:`All three of the sisters cars were repaired in Eddies garage.`,a:`All three of the sisters' cars were repaired in Eddie's garage.`},{q:`The students ID cards were checked by the colleges security guard.`,a:[`The students' ID cards were checked by the college's security guard.`,`The student's ID cards were checked by the college's security guard.`]},{q:`The politicians listened to all of the peoples opinions.`,a:`The politicians listened to all of the people's opinions.`},{q:`I think womens professional football teams should be paid as much as mens.`,a:`I think women's professional football teams should be paid as much as men's.`},{q:`Alicias cat ran across several of her neighbours gardens.`,a:`Alicia's cat ran across several of her neighbours' gardens.`}]},
+{id:'g7',src:'wb',code:'WB D5',title:'Apostrophes: both uses',type:'rewrite',prefill:true,
+ items:[{q:`Elenas got two weeks work at the end of July.`,a:`Elena's got two weeks' work at the end of July.`},{q:`Ill see you at your sisters wedding.`,a:[`I'll see you at your sister's wedding.`,`I'll see you at your sisters' wedding.`]},{q:`Thats why the boys father was angry with them.`,a:[`That's why the boys' father was angry with them.`]},{q:`Its a really long way to the doctors from my house.`,a:`It's a really long way to the doctor's from my house.`},{q:`The girls bedroom was being decorated so she couldnt do her homework there.`,a:`The girl's bedroom was being decorated so she couldn't do her homework there.`},{q:`Shops really cant afford to ignore their customers opinions.`,a:`Shops really can't afford to ignore their customers' opinions.`}]},
+{id:'g8',src:'wb',code:'WB D6',title:'Present simple and continuous',type:'gap',
+ items:[`I can’t believe that Delphine {is enjoying|'s enjoying} listening to this band – she usually {hates} this kind of music. (enjoy / hate)`,`I {suppose} that Rishab will win the tennis tournament. He {is playing|'s playing} really well. (suppose / play)`,`Magda and Karolina usually {avoid} talking about politics, but they {are arguing|'re arguing} about it now. (avoid / argue)`,`I {am reading|'m reading} a really good book at the moment, which {contains} lots of information about the history of my country. (read / contain)`,`I {don't understand|do not understand} what this man {is saying|'s saying} to me. Can you translate it for me, please? (not understand / say)`]},
+/* extras */
+{id:'xg1',src:'x',code:'X G1',title:'Simple or continuous?',type:'choice',
+ items:[`Look! It [snows|*’s snowing]!`,`Water [*boils|is boiling] at 100 degrees Celsius.`,`I [*don’t know|am not knowing] the answer.`,`Shh! The baby [sleeps|*is sleeping].`,`My dad [*works|is working] in a bank – he’s been there for years.`,`This week I [*’m working|work] from home because the office is closed.`,`She [*wants|is wanting] to become a vet.`,`How often [*do you go|are you going] to the gym?`,`This bag [*belongs|is belonging] to my sister.`,`Why [*are you smiling|do you smile]? What’s so funny?`,`People [*are using|use] AI more and more these days.`,`I [*prefer|am preferring] tea to coffee.`]},
+{id:'xg2',src:'x',code:'X G2',title:'Make it a sentence',type:'gap',
+ instr:`Put the verbs in brackets into the present simple or present continuous.`,
+ items:[`Monica {works} in several schools. (work)`,`Right now she {is talking|'s talking} to a journalist about her life. (talk)`,`Sally usually {helps} her mum with the blog at weekends. (help)`,`At the moment they {are planning|'re planning} a new book for parents. (plan)`,`Monica {believes} that everyone can learn to read. (believe)`,`What {does} this word {mean}? (mean)`,`Kelly {is learning|'s learning} to control her fear of birds this month. (learn)`,`Phobia sufferers often {avoid} everyday situations. (avoid)`,`I {don't understand|do not understand} why some people {are} afraid of butterflies. (not understand / be)`,`Look – the ducks {are coming|'re coming} towards us! (come)`]},
+{id:'xg3',src:'x',code:'X G3',title:'Its or it’s? Your or you’re? Whose or who’s?',type:'choice',
+ items:[`[*It’s|Its] been a long day.`,`The company changed [it’s|*its] logo.`,`[*You’re|Your] going to love this film.`,`Is this [you’re|*your] jacket?`,`[*Who’s|Whose] coming to the party?`,`[Who’s|*Whose] phone is ringing?`,`[*They’re|Their] always late.`,`The children left [*their|they’re] bags in the hall.`]},
+{id:'xg4',src:'x',code:'X G4',title:'Where does the apostrophe go?',type:'choice',
+ items:[`My [*sister’s|sisters’] bike is red. (I have one sister.)`,`My [sister’s|*sisters’] bedrooms are next to each other. (I have two sisters.)`,`The [*children’s|childrens’] playground is closed.`,`I’m going to my [*friend’s|friends’s] house tonight.`,`The [teacher’s|*teachers’] room is on the second floor. (all the teachers share it)`,`We need to listen to [*people’s|peoples’] opinions.`,`[*James’s|James’] dog barks all night.`,`I bought some [*apples|apple’s] at the market.`]},
+{id:'xg5',src:'x',code:'X G5',title:'Find the mistake',type:'strike',
+ instr:`Each sentence has one mistake with a verb or an apostrophe. Click it and type the correction.`,
+ items:[{s:`I *am knowing the answer to this question.`,fix:`know`},{s:`She *study English every evening after dinner.`,fix:`studies`},{s:`My grandparents *lives in a small village.`,fix:`live`},{s:`The *dog’s are barking outside.`,fix:`dogs`},{s:`Listen! Somebody *knocks at the door.`,fix:`is knocking|'s knocking`},{s:`This book *is containing a lot of useful tips.`,fix:`contains`},{s:`I think *its going to rain later.`,fix:`it's|it’s`},{s:`We *doesn’t usually eat meat.`,fix:`don't|don’t`}]}
+]});
+
+/* =================== EXAM =================== */
+S({key:'e',nav:'Exam practice',letter:'E',eyebrow:'Exam-style questions',title:'Exam practice',
+blurb:'Reading, writing, listening and speaking tasks in IGCSE format, plus the end-of-unit reflection.',ex:[
+{id:'e1',src:'cb',code:'Reading',title:'Can you cure a phobia?',type:'gap',
+ passage:`<h3>Can you cure a phobia?</h3>
+<p>Phobia sufferers experience extreme fear of something that’s unlikely to harm them. Taking your children to feed the ducks is a normal and pleasurable activity for most parents. But for Kelly Phillips, a young mother of two, it posed a terrifying challenge. Kelly has had a phobia about birds since childhood. Even seeing one on the roof or flying high above her would throw her into a blind panic. The disorder, called ornithophobia, had ruined her life, and meant that she struggled even to do the shopping in case she encountered a bird on the way there.</p>
+<p>But what lies behind such fears? People with phobias have a pure, illogical terror of an object or situation, often convincing themselves that something disastrous is about to happen. So people afraid of spiders (arachnophobes) may fear they will be poisoned by a bite, while those with claustrophobia (fear of closed spaces) will avoid using a lift, imagining it will break and they will be left to die. Their fear then provokes physical symptoms such as rapid breathing, sweating and a fast-beating heart. Such reactions are part of the ‘fight or flight’ response, which can be useful for life and death situations, such as if there is a lion nearby. But for phobias, it’s no use telling people they are not thinking sensibly: they already know that.</p>
+<p>It wasn’t clear what started Kelly’s ornithophobia. It might have been a reaction to a bird flying at her as a child, as witnessed by her elder sister, since very upsetting incidents in childhood can generate such fears. (Some claustrophobics recall being trapped in a crowded place for a long period, for instance.) Over-anxious parents giving off signals that certain things are dangerous can also be responsible; this is most probably the case for Kelly, with teasing from classmates adding to her fears. Whatever the cause, sufferers may be left too scared even to go for a walk on their own.</p>
+<p>Kelly agreed to take part in a step-by-step treatment programme, with other ornithophobics, beginning with a trip to a park to feed the birds. Even coming into contact with bird food left quite a few participants in tears and threatening to walk off, but one or two in the group managed to help the others through it. The next step was visiting a zoo, where each had to handle a small bird that was used to humans.</p>
+<p>The sufferers were taught to deal with their anxiety symptoms by focusing on breathing and relaxation, and distracting themselves from their negative thoughts by focusing on something in the here and now; for example, the wallpaper, or even their own feet.</p>
+<p>For the final step, the group had to handle larger, mice-hunting birds. The purpose here was for them to realise for themselves that, despite their appearance, these rather terrifying-looking creatures are harmless. It was an important exercise as phobics tend to generalise, believing all birds – or all spiders, for example – are a threat. Kelly chose a small bird that hopped onto her head, from where she had to pull it onto her hand.</p>
+<p>So, did these experiences help? Well, we revisited those who took part in the programme, and all reported having overcome their fears. As for Kelly, she is a changed woman. Despite some minor panic attacks, she has learnt to deal with her anxiety. She even sent us a happy family shot of her with her family feeding the ducks in the park.</p>`,
+ instr:`Answer in a few words. The checker accepts the key words; compare with “Show answers” if yours is marked wrong but means the same. [Total: 8]`,num:true,
+ loose:true,items:[`When did Kelly’s phobia begin? {in childhood|childhood|child}`,`What is the name for the body’s reaction to an emergency such as a dangerous animal? {the ‘fight or flight’ response|fight or flight}`,`According to the article, who is most likely to have caused Kelly’s phobia? {her over-anxious parents|parent}`,`Why did the programme advise the ornithophobics to stare at their feet? {to distract themselves from negative thoughts|distract|here and now}`,`What important fact were participants supposed to learn in the last part of the programme? {the birds are harmless|harmless|not a threat|not dangerous}`,`Everyday activity 1 (not feeding birds) that is stressful for phobia sufferers: {doing the shopping|shop|lift|walk}`,`Everyday activity 2: {using a lift|lift|shop|walk}`,`Everyday activity 3: {going for a walk on their own|walk|shop|lift}`]},
+{id:'e2',src:'cb',code:'Writing 1',title:'Informal email: something that scared you',type:'open',words:[120,160],
+ instr:`You recently had to do something that made you feel scared. Write an email to tell a friend about it. In your email, you should:`,
+ prompts:[`describe what you had to do and how you felt about it`,`explain how you overcame your fear`,`say what you have learnt from this experience.`],
+ checklist:[`Friendly opening and closing (Hi…, Love / See you soon…)`,`All three bullet points covered`,`Informal language and contractions`,`Fear expressions from B2`,`120–160 words`],
+ model:[`Hi Sofia,`,`Guess what? Last Friday I had to give a presentation in front of the whole school! To tell you the truth, I was terrified. I felt sick every time I thought about it, and the night before I hardly slept.`,`In the end, my older brother helped me. He made me practise in front of the family three times, and he told me to look at one friendly face in the audience. On the day, I took a few deep breaths, found my friend Max in the second row and just talked to him. My hands were shaking for the first minute, but then I actually started to enjoy it!`,`I’ve learnt that preparation really is the key – and that things are rarely as bad as you imagine. Next time I won’t panic so much.`,`Write soon and tell me your news!<br>Iryna`]},
+{id:'e3',src:'cb',code:'Writing 2',title:'Informal email: a guest speaker',type:'open',words:[120,160],
+ instr:`Last week, your school invited a well-known person to give a talk to your class. Write an email telling your friend about it. In your email, you should:`,
+ prompts:[`say who the speaker was and why they came`,`explain what you admire about them`,`describe what they talked about.`]},
+{id:'e4',src:'cb',code:'Writing 3',title:'Formal report: a welcome video',type:'open',words:[120,160],
+ instr:`Your school is planning to make a video to help younger students who will be starting next year feel welcome and less nervous. Your headteacher wants your class’s opinions, and you have been asked to write a report. Say why a video is a good idea, and suggest what should be included. Use these comments and your own ideas:`,
+ prompts:[`“A video provides information quickly and easily.”`,`“The new students could watch it again later if they forget something.”`,`“Interviews with some friendly students might make the new students feel more relaxed.”`,`“It would be good to show clubs, not just lessons.”`],
+ checklist:[`A title and clear paragraphs (introduction – benefits – suggestions – conclusion)`,`Formal language, no contractions`,`Comments rewritten in your own words + your own ideas`,`120–160 words`]},
+{id:'e5',src:'cb',code:'Listening',title:'Interview with a teenage blogger',type:'mcq',track:'Track 1.4',
+ instr:`You will hear Victor, a radio presenter, asking Carlos Gomez, a teenage blogger, some questions about his hobby as part of a radio feature on developing potential in young people. For each question, choose the correct answer. You will hear the interview twice. [Total: 8]`,
+ audio:[{who:'Presenter',v:0,t:`Today we have an exciting guest, teenage blogger Carlos Gomez. Welcome to the show, Carlos.`},
+ {who:'Carlos',v:1,t:`Thank you, Victor. Pleased to be here.`},
+ {who:'Presenter',v:0,t:`Our listeners would love to hear about your amazing blog, boyzownzone, which is one of the most successful in the blogosphere. What do you blog about?`},
+ {who:'Carlos',v:1,t:`Anything! Well, that’s not strictly true. I’m very selective about what I blog about. A blog – it says a lot about you as a person.`},
+ {who:'Presenter',v:0,t:`That’s a good point. I suppose blogging gives everyone the opportunity to give their opinions and, well, just be yourself. And there are certainly some amazing blogs on the internet.`},
+ {who:'Carlos',v:1,t:`There are some fabulous blogs for teenagers, but they are mainly for teenage girls. If I’m honest, the motive for doing my blog in the first place was that I thought it was something I could achieve. I said to myself, ‘Carlos, come on, start your own blog. It can’t be all that hard.’ I wanted to achieve a blog that would be interesting to read.`},
+ {who:'Presenter',v:0,t:`So you blog about your daily life, what you’re doing at the moment, with a focus on activities boys like?`},
+ {who:'Carlos',v:1,t:`That is absolutely correct. I love blogging about scientific inventions… that is one of my favourite things. I used to focus on teenage boy inventors, but now I write about anyone who deserves recognition even if many people haven’t heard of them or their work.`},
+ {who:'Presenter',v:0,t:`You have sections dedicated to different topics: music, art, football. It’s not all about inventions.`},
+ {who:'Carlos',v:1,t:`And don’t forget my book review section! I am a reading fanatic and have reviewed some amazing books. People say boys only want to watch action movies or play on the PlayStation, but now I get loads of hits from boys about books I recommend. I also get comments from little kids, mums, dads and grandparents who want to buy books for their grandchildren. One lady asked her local bookseller for one of the books I’d recommended and he said that the book became his bestselling book overnight.`},
+ {who:'Presenter',v:0,t:`Sounds like you have made reading cool. That is not bad.`},
+ {who:'Carlos',v:1,t:`I got a brilliant post from a boy who said that he used to be anti-reading unless it was social media, and he wasn’t very interested in that. He used to play computer games all the time. Then he started reading The Dark in Their Eyes, which is the horror series I blog about. I guarantee these books are as thrilling as any action movie. He says he’s now a reading addict, just as I am. His friends can’t believe it! He’s a total bookworm!`},
+ {who:'Presenter',v:0,t:`I hear you are interested in the Wonderworld series of comic books. They have very unusual drawings, don’t they?`},
+ {who:'Carlos',v:1,t:`Wonderworld is laugh-out-loud funny. Comic books with a difference! My family say the illustrations are strange and they would prefer pictures of flowers or sunsets, but that kind of art leaves me unimpressed. I look up to those artists who create the artwork – they are so talented. If I ever win the lottery, I’m going to buy the original artworks and put them on my bedroom wall. The Wonderworld books are expensive but they are definitely worth it. I persuaded my school library to buy a set of Wonderworld and now almost everyone at school is on the waiting list!`},
+ {who:'Presenter',v:0,t:`How do you find time for all this?`},
+ {who:'Carlos',v:1,t:`Blogging makes me happy and is a priority. Some bloggers communicate almost constantly but, although I love sharing my news, I think quite carefully before I update my blog. However, people visit my site almost daily so I do not want to let them down by not updating. I post up a page when I get a free evening or when there is a quiet lunchtime at school.`},
+ {who:'Presenter',v:0,t:`Any tips for would-be bloggers who might be listening now?`},
+ {who:'Carlos',v:1,t:`Just go for it. Don’t let your spelling or anything hold you back. People don’t judge you. My grammar and spelling used to be rubbish but blogging has made my literacy better. What matters most is the people who are going to read your blog, so think about what they would like. Using appealing pictures makes a big difference to the blog as well.`},
+ {who:'Presenter',v:0,t:`What are your future goals?`},
+ {who:'Carlos',v:1,t:`If I have a future goal, it’s to meet one of the wonderfully talented people I have blogged about. Just to get a post from one of them would be a dream come true.`},
+ {who:'Presenter',v:0,t:`Thank you, Carlos. We’ve had lots of texts coming in from listeners while we’ve been talking. Here is one from…`}],
+ items:[
+ {q:`The main reason Carlos started his blog was because:`,o:[`teenage blogs are very interesting to read.`,`he thought he had the skills to write a blog.`,`other blogs mainly reflected the interests of teenage boys.`],a:1},
+ {q:`When choosing to write about inventors, Carlos concentrates on:`,o:[`teenage boy inventors.`,`famous inventors.`,`little-known inventors.`],a:2},
+ {q:`Carlos’s book review section is popular with:`,o:[`people of all ages.`,`booksellers.`,`shopkeepers.`],a:0},
+ {q:`One of the boys reading his blog changed from:`,o:[`watching action movies to reading.`,`posting comments on social media to reading.`,`playing computer games to reading.`],a:2},
+ {q:`What does Carlos think about the artwork in the series of Wonderworld books?`,o:[`He admires it.`,`He finds it weird.`,`He considers it not very good.`],a:0},
+ {q:`We know the Wonderworld series is very popular at his school because:`,o:[`students have bought the original artwork.`,`many students are waiting for a copy.`,`students want to buy sets of the Wonderworld series.`],a:1},
+ {q:`Carlos updates his blog on a regular basis because:`,o:[`he does not want to disappoint his regular readers.`,`he frequently has free time in the evening and at lunchtime.`,`he always has fresh news to share with users.`],a:0},
+ {q:`His advice for those who want to write a blog is to:`,o:[`have an attractive visual presentation.`,`make it enjoyable for readers.`,`have good grammar and spelling.`],a:1}]},
+{id:'e6',src:'cb',code:'Speaking',title:'Warm-up and interview',type:'open',write:false,timer:[[120,'Speak']],
+ instr:`Take turns asking and answering. Warm-up: 1–2 minutes. Interview: 2–3 minutes, then change roles.`,
+ prompts:[`<b>Warm-up:</b> Where do you live? · What is your favourite school subject? · What did you do during your last holiday?`,`<b>Interview – your personality and your friends:</b> Can you tell me about your personality? · In what ways are your friends like you or different from you? · What kind of person do you think you would not get on well with, and why?`]},
+{id:'e7',src:'cb',code:'Speaking',title:'Short talk: getting to know people',type:'open',write:false,timer:[[60,'Prepare'],[120,'Talk']],
+ instr:`You are starting a new school or university next term. It recommends two ways to get to know the other students before term starts. Compare the options, then talk for about 2 minutes. Which would you prefer, and why?`,
+ prompts:[`an online chat group`,`an informal meeting at the school/university with drinks and snacks`]},
+{id:'e8',src:'cb',code:'Speaking',title:'Discussion',type:'open',write:false,timer:[[180,'Discuss']],
+ instr:`Role-play the discussion for about 3 minutes, then change roles.`,
+ prompts:[`Can you tell things about people from their clothes and physical appearance?`,`Are people who have no brothers or sisters less sociable than people who do?`,`Is there an aspect of your personality that you would like to lose or develop?`,`People’s personalities can change when they are online. Do you agree?`]},
+{id:'e9',src:'cb',code:'Reflection',title:'Self-assessment',type:'open',write:false,
+ instr:`Tick the areas where you now feel fairly confident. Come back later in the course and see if your confidence has improved.`,
+ checklist:[`I can discuss goals, achievements and qualities we admire, using appropriate vocabulary.`,`I can understand the audience, purpose and features of different text types.`,`I can describe people and their qualities.`,`I can understand a speaker’s ideas and attitudes as I listen.`,`I can write a formal email for a specific purpose and audience.`,`I can use apostrophes and the present simple / continuous correctly.`]}
+]});
+
+/* blurbs for home tiles */
+SECTIONS.forEach(s=>{if(!s.blurb)s.blurb=''});
+
+</script>
+<script>
+/* ---------- app ---------- */
+function countable(sec){return sec.ex.filter(e=>['choice','gap','select','mcq','rewrite','strike','spell'].includes(e.type))}
+function updStars(){const all=SECTIONS.flatMap(s=>countable(s));$('#starT').textContent=all.length;$('#starN').textContent=all.filter(e=>scores[e.id]===1).length;
+  document.querySelectorAll('.rail a').forEach(a=>a.classList.toggle('done',scores[a.dataset.id]===1))}
+function renderHome(){
+  const m=$('#main');m.innerHTML='';
+  const hero=el('section',{class:'hero'},
+    el('div',{},el('div',{class:'eyebrow'},'Success International English Skills · Unit 1'),el('h1',{html:'Goals and <em>achievements</em>'}),
+      el('p',{style:'max-width:60ch;color:var(--muted)'},'Every task from the Coursebook and Workbook for Unit 1, made interactive, plus extra practice on the same vocabulary and grammar. Check your answers as you go: an exercise with every answer right earns a gold star.'),
+      el('p',{class:'ua'},'Інтерактивний тренажер по Unit 1: завдання з підручника й робочого зошита та додаткові вправи на ту ж лексику й граматику.')),
+    el('div',{},scene(SCENES.home),el('div',{class:'goalpost'},el('b',{},'In this unit you will:'),...['explore goals, achievements and qualities we admire','notice audience, purpose and features of texts','describe people and their qualities','listen for speakers’ ideas and attitudes','write a formal email for a specific purpose','use apostrophes and the present simple / continuous'].map(t=>el('span',{},'— '+t)))));
+  m.append(hero);
+  const g=el('div',{class:'grid-home'});
+  SECTIONS.filter(s=>s.key!=='home').forEach(s=>{const cs=countable(s);const d=cs.filter(e=>scores[e.id]===1).length;
+    g.append(el('button',{class:'tile',type:'button',onclick:()=>go(s.key)},EM(SEC_EMO[s.key],52),el('span',{class:'l'},s.letter+' · '+s.ex.length+' tasks'),el('h3',{},s.title),el('p',{},s.blurb),el('div',{class:'meter'},el('i',{style:`width:${cs.length?d/cs.length*100:0}%`})),el('p',{},`${d} of ${cs.length} gold stars`)))});
+  m.append(g);
+  const start=SECTIONS.find(s=>s.key==='home');
+  const cards=el('div',{class:'cards',style:'margin-top:28px'});start.ex.forEach(e=>cards.append(card(e)));m.append(cards);
+  m.append(el('p',{class:'footnote'},'Listening tasks play the official audioscripts (tracks 1.1, 1.3, 1.4 and Workbook audio 1–2) through your browser’s speech voice. Answers you type and stars you earn are kept in this browser only.'));
+}
+function renderSection(s){
+  const m=$('#main');m.innerHTML='';
+  m.append(el('div',{class:'sec-grid'},el('div',{class:'sec-head'},el('div',{class:'eyebrow'},s.eyebrow),el('h1',{},s.title),el('p',{},s.blurb),
+    el('div',{class:'legend'},...Object.values(SRC).map(([c,l])=>el('span',{},el('span',{class:'code '+c},l),l==='Coursebook'?'tasks from the student’s book':l==='Workbook'?'tasks from the workbook':'new practice on the same language')))),scene(SCENES[s.key]||[])));
+  const rail=el('nav',{class:'rail','aria-label':'Exercises'});const cards=el('div',{class:'cards'});let grp=null;
+  s.ex.forEach(e=>{const g=SRC[e.src][1];if(g!==grp){grp=g;rail.append(el('div',{class:'grp'},g))}
+    const a=el('a',{href:'#'+e.id,'data-id':e.id,onclick:ev=>{ev.preventDefault();document.getElementById(e.id).scrollIntoView({behavior:'smooth'})}},el('span',{class:'n'},e.code),EM(exEmo(e),18),el('span',{},e.title));rail.append(a);cards.append(card(e))});
+  m.append(el('div',{class:'layout'},rail,cards));updStars();
+}
+function go(key){stopSpeak();const s=SECTIONS.find(x=>x.key===key)||SECTIONS[0];
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-current',b.dataset.k===s.key?'true':'false'));
+  s.key==='home'?renderHome():renderSection(s);store.set('tab',s.key);window.scrollTo(0,0);updStars()}
+const tabs=$('#tabs');
+SECTIONS.forEach(s=>tabs.append(el('button',{type:'button','data-k':s.key,onclick:()=>go(s.key)},EM(SEC_EMO[s.key],22),s.letter?el('span',{class:'l'},s.letter):null,s.nav)));
+go(store.get('tab','home'));
+</script>
+
+</body></html>
